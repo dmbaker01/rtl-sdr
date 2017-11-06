@@ -35,6 +35,7 @@ doc/
 src/rtl_sdr
 src/rtl_tcp
 
+build/*
 CMakeCache.txt
 */CMakeFiles
 CMakeFiles
