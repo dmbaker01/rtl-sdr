@@ -54,6 +54,7 @@
 #include "tuner_fc0013.h"
 #include "tuner_fc2580.h"
 #include "tuner_r82xx.h"
+#include "tuner_r848.h"
 
 typedef struct rtlsdr_tuner_iface {
 	/* tuner interface */
@@ -120,6 +121,8 @@ struct rtlsdr_dev {
 	struct e4k_state e4k_s;
 	struct r82xx_config r82xx_c;
 	struct r82xx_priv r82xx_p;
+	struct r848_config r848_c;
+	struct r848_priv r848_p;
 	/* status */
 	int dev_lost;
 	int driver_active;
@@ -263,6 +266,55 @@ int r820t_set_gain_mode(void *dev, int manual) {
 	return r82xx_set_gain(&devt->r82xx_p, manual, 0);
 }
 
+int r848t_init(void *dev) {
+        rtlsdr_dev_t* devt = (rtlsdr_dev_t*)dev;
+        devt->r848_p.rtl_dev = dev;
+
+        if (devt->tuner_type == RTLSDR_TUNER_R848) {
+                devt->r848_c.i2c_addr = R848_I2C_ADDR;
+                devt->r848_c.rafael_chip = CHIP_R848;
+        }
+
+        rtlsdr_get_xtal_freq(devt, NULL, &devt->r848_c.xtal);
+
+        devt->r848_c.max_i2c_msg_len = 8;
+        devt->r848_c.use_predetect = 0;
+        devt->r848_p.cfg = &devt->r848_c;
+
+        return r848_init(&devt->r848_p);
+}
+int r848t_exit(void *dev) {
+        rtlsdr_dev_t* devt = (rtlsdr_dev_t*)dev;
+        return r82xx_standby(&devt->r82xx_p);
+}
+
+int r848t_set_freq(void *dev, uint32_t freq) {
+        rtlsdr_dev_t* devt = (rtlsdr_dev_t*)dev;
+        return r82xx_set_freq(&devt->r82xx_p, freq);
+}
+
+int r848t_set_bw(void *dev, int bw) {
+        int r;
+        rtlsdr_dev_t* devt = (rtlsdr_dev_t*)dev;
+
+        r = r82xx_set_bandwidth(&devt->r82xx_p, bw, devt->rate);
+        if(r < 0)
+                return r;
+        r = rtlsdr_set_if_freq(devt, r);
+        if (r)
+                return r;
+        return rtlsdr_set_center_freq(devt, devt->freq);
+}
+
+int r848t_set_gain(void *dev, int gain) {
+        rtlsdr_dev_t* devt = (rtlsdr_dev_t*)dev;
+        return r82xx_set_gain(&devt->r82xx_p, 1, gain);
+}
+int r848t_set_gain_mode(void *dev, int manual) {
+        rtlsdr_dev_t* devt = (rtlsdr_dev_t*)dev;
+        return r82xx_set_gain(&devt->r82xx_p, manual, 0);
+}
+
 /* definition order must match enum rtlsdr_tuner */
 static rtlsdr_tuner_iface_t tuners[] = {
 	{
@@ -298,6 +350,11 @@ static rtlsdr_tuner_iface_t tuners[] = {
 		r820t_set_freq, r820t_set_bw, r820t_set_gain, NULL,
 		r820t_set_gain_mode
 	},
+	{
+		r848t_init, r848t_exit,
+		r848t_set_freq, r848t_set_bw, r848t_set_gain, NULL,
+		r848t_set_gain_mode
+	}
 };
 
 typedef struct rtlsdr_dongle {
@@ -1561,6 +1618,13 @@ int rtlsdr_open(rtlsdr_dev_t **out_dev, uint32_t index)
 	if (reg == R82XX_CHECK_VAL) {
 		fprintf(stderr, "Found Rafael Micro R828D tuner\n");
 		dev->tuner_type = RTLSDR_TUNER_R828D;
+		goto found;
+	}
+
+	reg = rtlsdr_i2c_read_reg(dev, R848_I2C_ADDR, R848_CHECK_ADDR);
+	if (reg == R848_CHECK_VAL) {
+		fprintf(stderr, "Found Raefael Micro R848 tuner\n");
+		dev->tuner_type = RTLSDR_TUNER_R848;
 		goto found;
 	}
 
