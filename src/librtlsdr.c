@@ -285,19 +285,19 @@ int r848t_init(void *dev) {
 }
 int r848t_exit(void *dev) {
         rtlsdr_dev_t* devt = (rtlsdr_dev_t*)dev;
-        return r82xx_standby(&devt->r82xx_p);
+        return r848_standby(&devt->r848_p);
 }
 
 int r848t_set_freq(void *dev, uint32_t freq) {
         rtlsdr_dev_t* devt = (rtlsdr_dev_t*)dev;
-        return r82xx_set_freq(&devt->r82xx_p, freq);
+        return r848_set_freq(&devt->r848_p, freq);
 }
 
 int r848t_set_bw(void *dev, int bw) {
         int r;
         rtlsdr_dev_t* devt = (rtlsdr_dev_t*)dev;
 
-        r = r82xx_set_bandwidth(&devt->r82xx_p, bw, devt->rate);
+        r = r848_set_bandwidth(&devt->r848_p, bw, devt->rate);
         if(r < 0)
                 return r;
         r = rtlsdr_set_if_freq(devt, r);
@@ -308,11 +308,11 @@ int r848t_set_bw(void *dev, int bw) {
 
 int r848t_set_gain(void *dev, int gain) {
         rtlsdr_dev_t* devt = (rtlsdr_dev_t*)dev;
-        return r82xx_set_gain(&devt->r82xx_p, 1, gain);
+        return r848_set_gain(&devt->r848_p, 1, gain);
 }
 int r848t_set_gain_mode(void *dev, int manual) {
         rtlsdr_dev_t* devt = (rtlsdr_dev_t*)dev;
-        return r82xx_set_gain(&devt->r82xx_p, manual, 0);
+        return r848_set_gain(&devt->r848_p, manual, 0);
 }
 
 /* definition order must match enum rtlsdr_tuner */
@@ -1027,6 +1027,7 @@ int rtlsdr_get_tuner_gains(rtlsdr_dev_t *dev, int *gains)
 				     166, 197, 207, 229, 254, 280, 297, 328,
 				     338, 364, 372, 386, 402, 421, 434, 439,
 				     445, 480, 496 };
+	const int r848_gains[] = { 0 , 496 };
 	const int unknown_gains[] = { 0 /* no gain values */ };
 
 	const int *ptr = NULL;
@@ -1052,6 +1053,8 @@ int rtlsdr_get_tuner_gains(rtlsdr_dev_t *dev, int *gains)
 	case RTLSDR_TUNER_R828D:
 		ptr = r82xx_gains; len = sizeof(r82xx_gains);
 		break;
+	case RTLSDR_TUNER_R848:
+		ptr = r848_gains; len = sizeof(r848_gains);
 	default:
 		ptr = unknown_gains; len = sizeof(unknown_gains);
 		break;
