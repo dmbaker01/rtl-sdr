@@ -32,7 +32,6 @@
 #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
 #define MHZ(x)		((x)*1000*1000)
 #define KHZ(x)		((x)*1000)
-
 /*
  * Static constants
  */
