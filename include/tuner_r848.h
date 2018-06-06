@@ -35,6 +35,7 @@
 
 #define REG_SHADOW_START	5
 #define R848_NUM_REGS		40
+#define R848_REG_NUM		40
 #define NUM_IMR			5
 #define IMR_TRIAL		9
 
@@ -99,12 +100,51 @@ enum r848_xtal_cap_value {
 	//XTAL_HIGH_CAP_0P
 };
 
+typedef struct _R848_Sys_Info_Type
+{
+        uint16_t                   IF_KHz;
+        uint16_t                   FILT_CAL_IF;
+        uint8_t          BW;
+        uint8_t            V17M;
+        uint8_t            HPF_COR;
+        uint8_t          FILT_EXT_ENA;
+        uint8_t          FILT_EXT_WIDEST;
+        uint8_t          FILT_EXT_POINT;
+//      uint8_t          AGC_CLK;
+        uint8_t            FILT_COMP;
+        uint8_t            FILT_CUR;
+        uint8_t            FILT_3DB;
+        uint8_t            SWBUF_CUR;
+        uint8_t          TF_CUR;
+        uint8_t            INDUC_BIAS;
+        uint8_t          SWCAP_CLK;
+        uint8_t            NA_PWR_DET;
+}R848_Sys_Info_Type;
+
 struct r848_config {
 	uint8_t i2c_addr;
 	uint32_t xtal;
 	unsigned int max_i2c_msg_len;
 	int use_predetect;
 	enum r848_chip rafael_chip;
+
+	/* tuner i2c address */
+	uint8_t i2c_address;
+
+	// tuner
+	uint8_t R848_DetectTfType ;
+	unsigned char R848_pre_standard;
+	uint8_t R848_Array[40];
+	uint8_t R848_Xtal_Pwr ;
+	uint8_t R848_Xtal_Pwr_tmp ;
+
+  /* dvbc/t */
+	uint8_t R848_SetTfType;
+	R848_Sys_Info_Type Sys_Info1;
+  /* DVBT */
+
+
+
 };
 
 struct r848_priv {
@@ -131,18 +171,17 @@ struct r848_priv {
 
 struct r848_priv_2 {
 	//struct r848_sect_type		imr_data[NUM_IMR];
-/*
-	u8 				delsys;
+	uint8_t 			delsys;
 
-	/ tune settings /
-	u8				standard;
-	u8				output_mode;
-	u8				agc_mode;
+	//tune settings /
+	uint8_t				standard;
+	uint8_t				output_mode;
+	uint8_t				agc_mode;
 
-	struct filter_cal		fc[R848_STD_SIZE];
+	//struct filter_cal		fc[R848_STD_SIZE];
 
 
-*/
+
 	//R848_Sys_Info_Type Sys_Info1;
 };
 
@@ -156,100 +195,101 @@ struct r848_freq_range {
 	uint8_t		xtal_cap0p;
 };
 
-/*
+
 typedef struct _R848_Set_Info
 {
-	u32                       RF_KHz;
-	u32						 DVBS_BW;
-	u8           R848_Standard;
+	uint32_t                       RF_KHz;
+	uint32_t						 DVBS_BW;
+	uint8_t           R848_Standard;
 	int  R848_DVBS_OutputSignal_Mode;
 	int           R848_DVBS_AGC_Mode; 
 } R848_Set_Info;
 
 struct filter_cal {
-	u8 flag;
-	u8 bw;
-	u8 code;
+	uint8_t flag;
+	uint8_t bw;
+	uint8_t code;
 };
 
 struct r848_sect_type {
-	u8	phase_y;
-	u8	gain_x;
-	u8	iqcap;
-	u8	value;
+	uint8_t	phase_y;
+	uint8_t	gain_x;
+	uint8_t	iqcap;
+	uint8_t	value;
 };
 
+/*
 typedef struct _R848_Sys_Info_Type
 {
-	u16		   IF_KHz;
-	u16		   FILT_CAL_IF;
-	u8          BW;
-	u8		   V17M; 
-	u8		   HPF_COR;
-	u8          FILT_EXT_ENA;
-	u8          FILT_EXT_WIDEST;
-	u8          FILT_EXT_POINT;
-//	u8          AGC_CLK;
-	u8		   FILT_COMP;
-	u8		   FILT_CUR;  
-	u8		   FILT_3DB; 
-	u8		   SWBUF_CUR;  
-	u8          TF_CUR;              
-	u8		   INDUC_BIAS;  
-	u8          SWCAP_CLK;
-	u8		   NA_PWR_DET;  
+	uint16_t		   IF_KHz;
+	uint16_t		   FILT_CAL_IF;
+	uint8_t          BW;
+	uint8_t		   V17M; 
+	uint8_t		   HPF_COR;
+	uint8_t          FILT_EXT_ENA;
+	uint8_t          FILT_EXT_WIDEST;
+	uint8_t          FILT_EXT_POINT;
+//	uint8_t          AGC_CLK;
+	uint8_t		   FILT_COMP;
+	uint8_t		   FILT_CUR;  
+	uint8_t		   FILT_3DB; 
+	uint8_t		   SWBUF_CUR;  
+	uint8_t          TF_CUR;              
+	uint8_t		   INDUC_BIAS;  
+	uint8_t          SWCAP_CLK;
+	uint8_t		   NA_PWR_DET;  
 }R848_Sys_Info_Type;
-
+*/
 
 
 typedef struct _R848_Freq_Info_Type
 {
-	u8		RF_POLY;
-	u8		LNA_BAND;
-	u8		LPF_CAP;
-	u8		LPF_NOTCH;
-    u8		XTAL_POW0;
-	u8		CP_CUR;
-	u8		IMR_MEM;
-	u8		Q_CTRL;   
+	uint8_t		RF_POLY;
+	uint8_t		LNA_BAND;
+	uint8_t		LPF_CAP;
+	uint8_t		LPF_NOTCH;
+    uint8_t		XTAL_POW0;
+	uint8_t		CP_CUR;
+	uint8_t		IMR_MEM;
+	uint8_t		Q_CTRL;   
 }R848_Freq_Info_Type;
 
 typedef struct _R848_SysFreq_Info_Type
 {
-	u8		LNA_TOP;
-	u8		LNA_VTH_L;
-	u8		MIXER_TOP;
-	u8		MIXER_VTH_L;
-	u8       RF_TOP;
-	u8       NRB_TOP;
-	u8       NRB_BW;
-	u8       BYP_LPF;
-	u8       RF_FAST_DISCHARGE;
-	u8       RF_SLOW_DISCHARGE;
-	u8       RFPD_PLUSE_ENA;
-	u8       LNA_FAST_DISCHARGE;
-	u8       LNA_SLOW_DISCHARGE;
-	u8       LNAPD_PLUSE_ENA;
-	u8       AGC_CLK;
+	uint8_t		LNA_TOP;
+	uint8_t		LNA_VTH_L;
+	uint8_t		MIXER_TOP;
+	uint8_t		MIXER_VTH_L;
+	uint8_t       RF_TOP;
+	uint8_t       NRB_TOP;
+	uint8_t       NRB_BW;
+	uint8_t       BYP_LPF;
+	uint8_t       RF_FAST_DISCHARGE;
+	uint8_t       RF_SLOW_DISCHARGE;
+	uint8_t       RFPD_PLUSE_ENA;
+	uint8_t       LNA_FAST_DISCHARGE;
+	uint8_t       LNA_SLOW_DISCHARGE;
+	uint8_t       LNAPD_PLUSE_ENA;
+	uint8_t       AGC_CLK;
 
 }R848_SysFreq_Info_Type;
 
 typedef struct _R848_Cal_Info_Type
 {
-	u8		FILTER_6DB;
-	u8		MIXER_AMP_GAIN;
-	u8		MIXER_BUFFER_GAIN;
-	u8		LNA_GAIN;
-	u8		LNA_POWER;
-	u8		RFBUF_OUT;
-	u8		RFBUF_POWER;
-	u8		TF_CAL;
+	uint8_t		FILTER_6DB;
+	uint8_t		MIXER_AMP_GAIN;
+	uint8_t		MIXER_BUFFER_GAIN;
+	uint8_t		LNA_GAIN;
+	uint8_t		LNA_POWER;
+	uint8_t		RFBUF_OUT;
+	uint8_t		RFBUF_POWER;
+	uint8_t		TF_CAL;
 }R848_Cal_Info_Type;
 
 typedef struct _R848_TF_Result
 {
-	u8   TF_Set;
-	u8   TF_Value;
+	uint8_t   TF_Set;
+	uint8_t   TF_Value;
 }R848_TF_Result;
 
 typedef enum _R848_TF_Band_Type
@@ -273,132 +313,15 @@ typedef enum _R848_TF_Type
 	R848_TF_SIZE
 } R848_TF_Type;
 
-u32 R848_LNA_HIGH_MID[R848_TF_SIZE] = { 644000, 644000, 644000, 644000, 644000, 500000, 500000, 500000, 500000}; 
-u32 R848_LNA_MID_LOW[R848_TF_SIZE] = { 388000, 388000, 348000, 348000, 348000, 300000, 300000, 300000, 300000};
-u32 R848_LNA_LOW_LOWEST[R848_TF_SIZE] = {164000, 164000, 148000, 124000, 124000, 156000, 156000, 108000, 108000};
-
-
-u32 R848_TF_Freq_High[R848_TF_SIZE][R848_TF_HIGH_NUM] = 
-{  	 { 784000, 784000, 776000, 744000, 712000, 680000, 648000, 647000},
-	 { 784000, 784000, 776000, 744000, 712000, 680000, 648000, 647000},
-	 { 784000, 784000, 776000, 744000, 712000, 680000, 648000, 647000},
-	 { 784000, 784000, 776000, 744000, 712000, 680000, 648000, 647000},
-	 { 784000, 784000, 776000, 744000, 712000, 680000, 648000, 647000},
-     { 784000, 784000, 776000, 680000, 608000, 584000, 536000, 504000},
-	 { 784000, 784000, 776000, 680000, 608000, 584000, 536000, 504000},
-	 { 784000, 776000, 712000, 616000, 584000, 560000, 520000, 504000},
-	 { 784000, 776000, 712000, 616000, 584000, 560000, 520000, 504000}
-};
-
-
-u32 R848_TF_Freq_Mid[R848_TF_SIZE][R848_TF_MID_NUM] = 
-{	  {608000, 584000, 560000, 536000, 488000, 440000, 416000, 392000},
-	  {608000, 584000, 560000, 536000, 488000, 440000, 416000, 392000},
-	  {608000, 560000, 536000, 488000, 440000, 392000, 376000, 352000},
-	  {608000, 560000, 536000, 488000, 440000, 392000, 376000, 352000},
-	  {608000, 560000, 536000, 488000, 440000, 392000, 376000, 352000},
-      {488000, 464000, 440000, 416000, 392000, 352000, 320000, 304000},
-	  {488000, 464000, 440000, 416000, 392000, 352000, 320000, 304000},
-	  {480000, 464000, 440000, 416000, 392000, 352000, 320000, 304000},
-	  {480000, 464000, 440000, 416000, 392000, 352000, 320000, 304000},
-};
-u32 R848_TF_Freq_Low[R848_TF_SIZE][R848_TF_LOW_NUM] = 
-{    {320000, 304000, 272000, 240000, 232000, 216000, 192000, 168000},  //164~388
-      {320000, 304000, 272000, 240000, 232000, 216000, 192000, 168000},  //164~388
-	  {256000, 240000, 232000, 224000, 216000, 192000, 168000, 160000},  //148~348
-	  {256000, 240000, 232000, 192000, 160000, 152000, 144000, 128000},  //124~348
-	  {264000, 240000, 192000, 184000, 176000, 152000, 144000, 128000},  //124~348
-      {280000, 248000, 232000, 216000, 192000, 176000, 168000, 160000},  //156~300
-      {280000, 248000, 232000, 216000, 192000, 176000, 168000, 160000},   //156~300
-	  {296000, 280000, 256000, 216000, 184000, 168000, 136000, 112000},   //
-	  {296000, 280000, 256000, 216000, 184000, 168000, 136000, 112000}   //
-};
-u32 R848_TF_Freq_Lowest[R848_TF_SIZE][R848_TF_LOWEST_NUM] = 
-{    {160000, 120000, 104000, 88000, 80000, 72000, 56000, 48000},
-      {160000, 120000, 104000, 88000, 80000, 72000, 56000, 48000},
-	  {144000, 120000, 104000, 88000, 80000, 72000, 56000, 48000},
-	  {120000, 96000,   88000,   80000, 72000, 64000, 56000, 48000},
-	  {104000, 96000,   88000,   80000, 72000, 64000, 56000, 48000},
-	  {136000, 120000, 104000, 88000, 72000, 64000, 56000, 48000},
-	  {128000, 120000, 104000, 96000, 80000, 72000, 64000, 56000},
-	  {104000, 96000, 88000, 80000, 72000, 64000, 56000, 48000},
-	  {104000, 96000, 88000, 80000, 72000, 64000, 56000, 48000}
-};
-
-u8 R848_TF_Result_High[R848_TF_SIZE][R848_TF_HIGH_NUM] = 
-{    {0x00, 0x00, 0x01, 0x03, 0x04, 0x05, 0x07, 0x07},
-      {0x00, 0x00, 0x01, 0x03, 0x04, 0x05, 0x07, 0x07},
-	  {0x00, 0x00, 0x01, 0x03, 0x04, 0x05, 0x07, 0x07},
-	  {0x00, 0x00, 0x01, 0x03, 0x04, 0x05, 0x07, 0x07},
-	  {0x00, 0x00, 0x01, 0x03, 0x04, 0x05, 0x07, 0x07},
-      {0x00, 0x00, 0x01, 0x05, 0x0A, 0x0C, 0x13, 0x19},
-	  {0x00, 0x00, 0x01, 0x05, 0x0A, 0x0C, 0x13, 0x19},
-	  {0x00, 0x03, 0x07, 0x0C, 0x0E, 0x0F, 0x1A, 0x1A},
-	  {0x00, 0x03, 0x07, 0x0C, 0x0E, 0x0F, 0x1A, 0x1A}
-};
-
-u8 R848_TF_Result_Mid[R848_TF_SIZE][R848_TF_MID_NUM] = 
-{    {0x00, 0x01, 0x03, 0x03, 0x06, 0x0B, 0x0E, 0x11},
-      {0x00, 0x01, 0x03, 0x03, 0x06, 0x0B, 0x0E, 0x11},
-	  {0x00, 0x03, 0x03, 0x06, 0x0B, 0x11, 0x12, 0x19},  
-	  {0x00, 0x03, 0x03, 0x06, 0x0B, 0x11, 0x12, 0x19},  
-	  {0x00, 0x03, 0x03, 0x06, 0x0B, 0x11, 0x12, 0x19},
-	  {0x06, 0x08, 0x0B, 0x0E, 0x13, 0x17, 0x1E, 0x1F},
-      {0x06, 0x08, 0x0B, 0x0E, 0x13, 0x17, 0x1E, 0x1F},
-	  {0x09, 0x0D, 0x10, 0x12, 0x16, 0x1B, 0x1E, 0x1F},
-	  {0x09, 0x0D, 0x10, 0x12, 0x16, 0x1B, 0x1E, 0x1F}
-};
-u8 R848_TF_Result_Low[R848_TF_SIZE][R848_TF_LOW_NUM] = 
-{    {0x00, 0x02, 0x04, 0x07, 0x0A, 0x0B, 0x0F, 0x16},
-      {0x00, 0x02, 0x04, 0x07, 0x0A, 0x0B, 0x0F, 0x16},
-	  {0x05, 0x07, 0x0A, 0x0B, 0x0B, 0x0F, 0x16, 0x1A},
-	  {0x05, 0x07, 0x0A, 0x0F, 0x1A, 0x1A, 0x23, 0x2A},
-	  {0x05, 0x08, 0x10, 0x13, 0x1A, 0x1A, 0x23, 0x2A},
-	  {0x05, 0x08, 0x0C, 0x0E, 0x10, 0x14, 0x18, 0x1A},
-	  {0x05, 0x08, 0x0C, 0x0E, 0x10, 0x14, 0x18, 0x1A},
-	  {0x00, 0x01, 0x03, 0x07, 0x0D, 0x11, 0x1E, 0x2F},
-	  {0x00, 0x01, 0x03, 0x07, 0x0D, 0x11, 0x1E, 0x2F}
-};
-u8 R848_TF_Result_Lowest[R848_TF_SIZE][R848_TF_LOWEST_NUM] = 
-{    {0x00, 0x06, 0x0C, 0x15, 0x1C, 0x1F, 0x3C, 0x3F},
-      {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x08},
-	  {0x02, 0x06, 0x0C, 0x15, 0x1C, 0x1F, 0x3C, 0x3F},
-	  {0x06, 0x11, 0x15, 0x1C, 0x1F, 0x2F, 0x3C, 0x3F},
-      {0x04, 0x08, 0x08, 0x08, 0x10, 0x12, 0x13, 0x13},
-	  {0x06, 0x09, 0x0E, 0x18, 0x25, 0x2F, 0x3C, 0x3F},
-	  {0x00, 0x04, 0x04, 0x08, 0x08, 0x10, 0x12, 0x13},
-	  {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x08},
-	  {0x0E, 0x14, 0x18, 0x1E, 0x25, 0x2F, 0x3C, 0x3F}
-};
-
-
-u8 R848_iniArray_hybrid[R848_REG_NUM] = {
-						0x00, 0x00, 0x40, 0x44, 0x17, 0x00, 0x06, 0xF0, 0x00, 0x41,
-					//  0x08  0x09  0x0A  0x0B  0x0C  0x0D  0x0E  0x0F  0x10  0x11
-						0x7B, 0x0B, 0x70, 0x06, 0x6E, 0x20, 0x70, 0x87, 0x96, 0x00,
-					//  0x12  0x13  0x14  0x15  0x16  0x17  0x18  0x19  0x1A  0x1B  
-						0x10, 0x00, 0x80, 0xA5, 0xB7, 0x00, 0x40, 0xCB, 0x95, 0xF0,
-					//  0x1C  0x1D  0x1E  0x1F  0x20  0x21  0x22  0x23  0x24  0x25
-						0x24, 0x00, 0xFD, 0x8B, 0x17, 0x13, 0x01, 0x07, 0x01, 0x3F};
-					//  0x26  0x27  0x28  0x29  0x2A  0x2B  0x2C  0x2D  0x2E  0x2F
-
-
-
-u8 R848_iniArray_dvbs[R848_REG_NUM] = {
-						0x80, 0x05, 0x40, 0x40, 0x1F, 0x1F, 0x07, 0xFF, 0x00, 0x40,
-					//  0x08  0x09  0x0A  0x0B  0x0C  0x0D  0x0E  0x0F  0x10  0x11
-						0xF0, 0x0F, 0x4D, 0x06, 0x6F, 0x20, 0x28, 0x83, 0x96, 0x00,  //0x16[1] pulse_flag HPF : Bypass ;  0x19[1:0] Deglich SW Cur : highest
-					//  0x12  0x13  0x14  0x15  0x16  0x17  0x18  0x19  0x1A  0x1B   
-						0x1C, 0x99, 0xC1, 0x83, 0xB7, 0x00, 0x4F, 0xCB, 0x95, 0xFD,
-					//  0x1C  0x1D  0x1E  0x1F  0x20  0x21  0x22  0x23  0x24  0x25
-						0xA4, 0x01, 0x24, 0x0B, 0x4F, 0x05, 0x01, 0x47, 0x3F, 0x3F};
-					//  0x26  0x27  0x28  0x29  0x2A  0x2B  0x2C  0x2D  0x2E  0x2F
-
-
-
-
-
-
+/*
+R848_SectType R848_IMR_Data[5] = {
+									{0, 0, 0, 0},
+									{0, 0, 0, 0},
+									{0, 0, 0, 0},
+									{0, 0, 0, 0},
+									{0, 0, 0, 0}
+									};//Please keep this array data for standby mode.
+*/
 
 
 typedef enum _R848_UL_TF_Type
@@ -445,7 +368,7 @@ typedef enum _R848_Xtal_Div_TYPE
 	XTAL_DIV1 = 0,
 	XTAL_DIV2
 }R848_Xtal_Div_TYPE;
-*/
+
 
 //----------------------------------------------------------//
 //                   R848 Public Parameter                     //
