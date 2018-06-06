@@ -26,7 +26,7 @@
 #define R848_H
 
 #define R848_I2C_ADDR		0xF4
-#define R848_XTAL_FREQ		16000000
+#define R848_XTAL		16000000
 
 #define R848_CHECK_ADDR		0x00
 #define R848_CHECK_VAL		0x69 //This value is bit reveresed
@@ -54,42 +54,44 @@ enum r848_chip {
         CHIP_R848
 };
 
-enum r848_tuner_type {
-	R848_DVB_T_6M = 0,
-	R848_DVB_T_7M,
-	R848_DVB_T_8M, 
-	R848_DVB_T2_6M,			//IF=4.57M
-	R848_DVB_T2_7M,			//IF=4.57M
-	R848_DVB_T2_8M,			//IF=4.57M
-	R848_DVB_T2_1_7M,
-	R848_DVB_T2_10M,
-	R848_DVB_C_8M,
-	R848_DVB_C_6M, 
-	R848_J83B,
-	R848_ISDB_T,             //IF=4.063M
-	R848_ISDB_T_4570,		 //IF=4.57M
-	R848_DTMB_4570,			 //IF=4.57M
-	R848_DTMB_6000,			 //IF=6.00M
-	R848_DTMB_6M_BW_IF_5M,   //IF=5.0M, BW=6M
-	R848_DTMB_6M_BW_IF_4500, //IF=4.5M, BW=6M
-	R848_ATSC,
-	R848_DVB_S,
-	R848_DVB_T_6M_IF_5M,
-	R848_DVB_T_7M_IF_5M,
-	R848_DVB_T_8M_IF_5M,
-	R848_DVB_T2_6M_IF_5M,
-	R848_DVB_T2_7M_IF_5M,
-	R848_DVB_T2_8M_IF_5M,
-	R848_DVB_T2_1_7M_IF_5M,
-	R848_DVB_C_8M_IF_5M,
-	R848_DVB_C_6M_IF_5M, 
-	R848_J83B_IF_5M,
-	R848_ISDB_T_IF_5M,            
-	R848_DTMB_IF_5M,     
-	R848_ATSC_IF_5M,
-	R848_FM,
-	R848_STD_SIZE,
-};
+typedef enum _R848_Standard_Type  //Don't remove standand list!!
+{
+        R848_DVB_T_6M = 0,
+        R848_DVB_T_7M,
+        R848_DVB_T_8M,
+        R848_DVB_T2_6M,                 //IF=4.57M
+        R848_DVB_T2_7M,                 //IF=4.57M
+        R848_DVB_T2_8M,                 //IF=4.57M
+        R848_DVB_T2_1_7M,
+        R848_DVB_T2_10M,
+        R848_DVB_C_8M,
+        R848_DVB_C_6M,
+        R848_J83B,
+        R848_ISDB_T,             //IF=4.063M
+        R848_ISDB_T_4570,                //IF=4.57M
+        R848_DTMB_4570,                  //IF=4.57M
+        R848_DTMB_6000,                  //IF=6.00M
+        R848_DTMB_6M_BW_IF_5M,   //IF=5.0M, BW=6M
+        R848_DTMB_6M_BW_IF_4500, //IF=4.5M, BW=6M
+        R848_ATSC,
+        R848_DVB_S,
+        R848_DVB_T_6M_IF_5M,
+        R848_DVB_T_7M_IF_5M,
+        R848_DVB_T_8M_IF_5M,
+        R848_DVB_T2_6M_IF_5M,
+        R848_DVB_T2_7M_IF_5M,
+        R848_DVB_T2_8M_IF_5M,
+        R848_DVB_T2_1_7M_IF_5M,
+        R848_DVB_C_8M_IF_5M,
+        R848_DVB_C_6M_IF_5M,
+        R848_J83B_IF_5M,
+        R848_ISDB_T_IF_5M,
+        R848_DTMB_IF_5M,
+        R848_ATSC_IF_5M,
+        R848_FM,
+        R848_STD_SIZE,
+
+}R848_Standard_Type;
 
 enum r848_xtal_cap_value {
 	XTAL_CAP
@@ -99,6 +101,19 @@ enum r848_xtal_cap_value {
 	//XTAL_LOW_CAP_0P,
 	//XTAL_HIGH_CAP_0P
 };
+
+typedef struct _R848_I2C_LEN_TYPE
+{
+	uint8_t RegAddr;
+	uint8_t Data[50];
+	uint8_t Len;
+}I2C_LEN_TYPE;
+
+typedef struct _R848_I2C_TYPE
+{
+	uint8_t RegAddr;
+	uint8_t Data;
+}I2C_TYPE;
 
 typedef struct _R848_Sys_Info_Type
 {
@@ -159,10 +174,12 @@ struct r848_priv {
 	uint8_t				input;
 	int				has_lock;
 	int				init_done;
+	int				inited;
+	int				i2c;
 
 	/* Store current mode */
 	uint32_t			delsys;
-	enum r848_tuner_type		type;
+	R848_Standard_Type		type;
 
 	uint32_t			bw;	/* in MHz */
 
@@ -211,12 +228,13 @@ struct filter_cal {
 	uint8_t code;
 };
 
-struct r848_sect_type {
-	uint8_t	phase_y;
-	uint8_t	gain_x;
-	uint8_t	iqcap;
-	uint8_t	value;
-};
+typedef struct _R848_SectType
+{
+	uint8_t   Phase_Y;
+	uint8_t   Gain_X;
+	uint8_t   Iqcap;
+	uint8_t   Value;
+}R848_SectType;
 
 /*
 typedef struct _R848_Sys_Info_Type
@@ -312,16 +330,6 @@ typedef enum _R848_TF_Type
 	R848_TF_82N_270N,		//270n/82n   (OTHER Standard)
 	R848_TF_SIZE
 } R848_TF_Type;
-
-/*
-R848_SectType R848_IMR_Data[5] = {
-									{0, 0, 0, 0},
-									{0, 0, 0, 0},
-									{0, 0, 0, 0},
-									{0, 0, 0, 0},
-									{0, 0, 0, 0}
-									};//Please keep this array data for standby mode.
-*/
 
 
 typedef enum _R848_UL_TF_Type
