@@ -203,6 +203,7 @@ int main(int argc, char **argv)
 	/* Set the frequency */
 	verbose_set_frequency(dev, frequency);
 
+	printf("gains option is %d\n",gain);
 	if (0 == gain) {
 		 /* Enable automatic gain */
 		verbose_auto_gain(dev);

@@ -33,7 +33,7 @@
 
 #define R848_IF_FREQ		3570000
 
-#define REG_SHADOW_START	5
+#define R848_REG_SHADOW_START	8
 #define R848_NUM_REGS		40
 #define R848_REG_NUM		40
 #define NUM_IMR			5
@@ -432,5 +432,12 @@ int r848_init(struct r848_priv *priv);
 int r848_set_freq(struct r848_priv *priv, uint32_t freq);
 int r848_set_gain(struct r848_priv *priv, int set_manual_gain, int gain);
 int r848_set_bandwidth(struct r848_priv *priv, int bandwidth,  uint32_t rate);
+
+int r848_print_registers(struct r848_priv *priv);
+int r848_tf_check(struct r848_priv *priv);
+int r848_cal_prepare(struct r848_priv *priv, uint8_t u1CalFlag);
+int r848_imr(struct r848_priv *priv, uint8_t IMR_MEM, uint8_t IM_Flag);
+R848_ErrCode R848_MUX( struct r848_priv *priv,uint32_t LO_KHz, uint32_t RF_KHz, R848_Standard_Type R848_Standard);
+R848_ErrCode R848_DVBS_Setting( struct r848_priv *priv,R848_Set_Info R848_INFO);
 
 #endif

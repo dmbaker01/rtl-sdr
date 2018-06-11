@@ -272,6 +272,7 @@ int r848t_init(void *dev) {
 
         if (devt->tuner_type == RTLSDR_TUNER_R848) {
                 devt->r848_c.i2c_addr = R848_I2C_ADDR;
+		devt->r848_c.i2c_address = R848_I2C_ADDR;
                 devt->r848_c.rafael_chip = CHIP_R848;
         }
 
@@ -311,7 +312,7 @@ int r848t_set_gain(void *dev, int gain) {
         return r848_set_gain(&devt->r848_p, 1, gain);
 }
 int r848t_set_gain_mode(void *dev, int manual) {
-        rtlsdr_dev_t* devt = (rtlsdr_dev_t*)dev;
+       rtlsdr_dev_t* devt = (rtlsdr_dev_t*)dev;
         return r848_set_gain(&devt->r848_p, manual, 0);
 }
 
@@ -1027,7 +1028,10 @@ int rtlsdr_get_tuner_gains(rtlsdr_dev_t *dev, int *gains)
 				     166, 197, 207, 229, 254, 280, 297, 328,
 				     338, 364, 372, 386, 402, 421, 434, 439,
 				     445, 480, 496 };
-	const int r848_gains[] = { 0 , 496 };
+	const int r848_gains[] = { 0, 9, 14, 27, 37, 77, 87, 125, 144, 157,
+                                     166, 197, 207, 229, 254, 280, 297, 328,
+                                     338, 364, 372, 386, 402, 421, 434, 439,
+                                     445, 480, 496 };
 	const int unknown_gains[] = { 0 /* no gain values */ };
 
 	const int *ptr = NULL;

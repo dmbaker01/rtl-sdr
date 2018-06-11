@@ -133,6 +133,7 @@ int nearest_gain(rtlsdr_dev_t *dev, int target_gain)
 		}
 	}
 	free(gains);
+	printf("nearest gain %d\n",nearest);
 	return nearest;
 }
 
