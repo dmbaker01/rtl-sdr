@@ -309,11 +309,11 @@ int r848t_set_bw(void *dev, int bw) {
 
 int r848t_set_gain(void *dev, int gain) {
         rtlsdr_dev_t* devt = (rtlsdr_dev_t*)dev;
-        return r848_set_gain(&devt->r848_p, 1, gain);
+        return r848_set_gain(&devt->r848_p, gain);
 }
 int r848t_set_gain_mode(void *dev, int manual) {
        rtlsdr_dev_t* devt = (rtlsdr_dev_t*)dev;
-        return r848_set_gain(&devt->r848_p, manual, 0);
+        return r848_set_gain_mode(&devt->r848_p, manual, 0);
 }
 
 /* definition order must match enum rtlsdr_tuner */

@@ -40,6 +40,101 @@ uint32_t R848_LNA_HIGH_MID[R848_TF_SIZE] = { 644000, 644000, 644000, 644000, 644
 uint32_t R848_LNA_MID_LOW[R848_TF_SIZE] = { 388000, 388000, 348000, 348000, 348000, 300000, 300000, 300000, 300000};
 uint32_t R848_LNA_LOW_LOWEST[R848_TF_SIZE] = {164000, 164000, 148000, 124000, 124000, 156000, 156000, 108000, 108000};
 
+uint32_t R848_TF_Freq_High[R848_TF_SIZE][R848_TF_HIGH_NUM] = 
+{  	 { 784000, 784000, 776000, 744000, 712000, 680000, 648000, 647000},
+	 { 784000, 784000, 776000, 744000, 712000, 680000, 648000, 647000},
+	 { 784000, 784000, 776000, 744000, 712000, 680000, 648000, 647000},
+	 { 784000, 784000, 776000, 744000, 712000, 680000, 648000, 647000},
+	 { 784000, 784000, 776000, 744000, 712000, 680000, 648000, 647000},
+     { 784000, 784000, 776000, 680000, 608000, 584000, 536000, 504000},
+	 { 784000, 784000, 776000, 680000, 608000, 584000, 536000, 504000},
+	 { 784000, 776000, 712000, 616000, 584000, 560000, 520000, 504000},
+	 { 784000, 776000, 712000, 616000, 584000, 560000, 520000, 504000}
+};
+
+
+uint32_t R848_TF_Freq_Mid[R848_TF_SIZE][R848_TF_MID_NUM] = 
+{	  {608000, 584000, 560000, 536000, 488000, 440000, 416000, 392000},
+	  {608000, 584000, 560000, 536000, 488000, 440000, 416000, 392000},
+	  {608000, 560000, 536000, 488000, 440000, 392000, 376000, 352000},
+	  {608000, 560000, 536000, 488000, 440000, 392000, 376000, 352000},
+	  {608000, 560000, 536000, 488000, 440000, 392000, 376000, 352000},
+      {488000, 464000, 440000, 416000, 392000, 352000, 320000, 304000},
+	  {488000, 464000, 440000, 416000, 392000, 352000, 320000, 304000},
+	  {480000, 464000, 440000, 416000, 392000, 352000, 320000, 304000},
+	  {480000, 464000, 440000, 416000, 392000, 352000, 320000, 304000},
+};
+uint32_t R848_TF_Freq_Low[R848_TF_SIZE][R848_TF_LOW_NUM] = 
+{    {320000, 304000, 272000, 240000, 232000, 216000, 192000, 168000},  //164~388
+      {320000, 304000, 272000, 240000, 232000, 216000, 192000, 168000},  //164~388
+	  {256000, 240000, 232000, 224000, 216000, 192000, 168000, 160000},  //148~348
+	  {256000, 240000, 232000, 192000, 160000, 152000, 144000, 128000},  //124~348
+	  {264000, 240000, 192000, 184000, 176000, 152000, 144000, 128000},  //124~348
+      {280000, 248000, 232000, 216000, 192000, 176000, 168000, 160000},  //156~300
+      {280000, 248000, 232000, 216000, 192000, 176000, 168000, 160000},   //156~300
+	  {296000, 280000, 256000, 216000, 184000, 168000, 136000, 112000},   //
+	  {296000, 280000, 256000, 216000, 184000, 168000, 136000, 112000}   //
+};
+uint32_t R848_TF_Freq_Lowest[R848_TF_SIZE][R848_TF_LOWEST_NUM] = 
+{    {160000, 120000, 104000, 88000, 80000, 72000, 56000, 48000},
+      {160000, 120000, 104000, 88000, 80000, 72000, 56000, 48000},
+	  {144000, 120000, 104000, 88000, 80000, 72000, 56000, 48000},
+	  {120000, 96000,   88000,   80000, 72000, 64000, 56000, 48000},
+	  {104000, 96000,   88000,   80000, 72000, 64000, 56000, 48000},
+	  {136000, 120000, 104000, 88000, 72000, 64000, 56000, 48000},
+	  {128000, 120000, 104000, 96000, 80000, 72000, 64000, 56000},
+	  {104000, 96000, 88000, 80000, 72000, 64000, 56000, 48000},
+	  {104000, 96000, 88000, 80000, 72000, 64000, 56000, 48000}
+};
+
+uint8_t R848_TF_Result_High[R848_TF_SIZE][R848_TF_HIGH_NUM] = 
+{    {0x00, 0x00, 0x01, 0x03, 0x04, 0x05, 0x07, 0x07},
+      {0x00, 0x00, 0x01, 0x03, 0x04, 0x05, 0x07, 0x07},
+	  {0x00, 0x00, 0x01, 0x03, 0x04, 0x05, 0x07, 0x07},
+	  {0x00, 0x00, 0x01, 0x03, 0x04, 0x05, 0x07, 0x07},
+	  {0x00, 0x00, 0x01, 0x03, 0x04, 0x05, 0x07, 0x07},
+      {0x00, 0x00, 0x01, 0x05, 0x0A, 0x0C, 0x13, 0x19},
+	  {0x00, 0x00, 0x01, 0x05, 0x0A, 0x0C, 0x13, 0x19},
+	  {0x00, 0x03, 0x07, 0x0C, 0x0E, 0x0F, 0x1A, 0x1A},
+	  {0x00, 0x03, 0x07, 0x0C, 0x0E, 0x0F, 0x1A, 0x1A}
+};
+
+uint8_t R848_TF_Result_Mid[R848_TF_SIZE][R848_TF_MID_NUM] = 
+{    {0x00, 0x01, 0x03, 0x03, 0x06, 0x0B, 0x0E, 0x11},
+      {0x00, 0x01, 0x03, 0x03, 0x06, 0x0B, 0x0E, 0x11},
+	  {0x00, 0x03, 0x03, 0x06, 0x0B, 0x11, 0x12, 0x19},  
+	  {0x00, 0x03, 0x03, 0x06, 0x0B, 0x11, 0x12, 0x19},  
+	  {0x00, 0x03, 0x03, 0x06, 0x0B, 0x11, 0x12, 0x19},
+	  {0x06, 0x08, 0x0B, 0x0E, 0x13, 0x17, 0x1E, 0x1F},
+      {0x06, 0x08, 0x0B, 0x0E, 0x13, 0x17, 0x1E, 0x1F},
+	  {0x09, 0x0D, 0x10, 0x12, 0x16, 0x1B, 0x1E, 0x1F},
+	  {0x09, 0x0D, 0x10, 0x12, 0x16, 0x1B, 0x1E, 0x1F}
+};
+uint8_t R848_TF_Result_Low[R848_TF_SIZE][R848_TF_LOW_NUM] = 
+{    {0x00, 0x02, 0x04, 0x07, 0x0A, 0x0B, 0x0F, 0x16},
+      {0x00, 0x02, 0x04, 0x07, 0x0A, 0x0B, 0x0F, 0x16},
+	  {0x05, 0x07, 0x0A, 0x0B, 0x0B, 0x0F, 0x16, 0x1A},
+	  {0x05, 0x07, 0x0A, 0x0F, 0x1A, 0x1A, 0x23, 0x2A},
+	  {0x05, 0x08, 0x10, 0x13, 0x1A, 0x1A, 0x23, 0x2A},
+	  {0x05, 0x08, 0x0C, 0x0E, 0x10, 0x14, 0x18, 0x1A},
+	  {0x05, 0x08, 0x0C, 0x0E, 0x10, 0x14, 0x18, 0x1A},
+	  {0x00, 0x01, 0x03, 0x07, 0x0D, 0x11, 0x1E, 0x2F},
+	  {0x00, 0x01, 0x03, 0x07, 0x0D, 0x11, 0x1E, 0x2F}
+};
+uint8_t R848_TF_Result_Lowest[R848_TF_SIZE][R848_TF_LOWEST_NUM] = 
+{    {0x00, 0x06, 0x0C, 0x15, 0x1C, 0x1F, 0x3C, 0x3F},
+      {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x08},
+	  {0x02, 0x06, 0x0C, 0x15, 0x1C, 0x1F, 0x3C, 0x3F},
+	  {0x06, 0x11, 0x15, 0x1C, 0x1F, 0x2F, 0x3C, 0x3F},
+      {0x04, 0x08, 0x08, 0x08, 0x10, 0x12, 0x13, 0x13},
+	  {0x06, 0x09, 0x0E, 0x18, 0x25, 0x2F, 0x3C, 0x3F},
+	  {0x00, 0x04, 0x04, 0x08, 0x08, 0x10, 0x12, 0x13},
+	  {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x03, 0x08},
+	  {0x0E, 0x14, 0x18, 0x1E, 0x25, 0x2F, 0x3C, 0x3F}
+};
+
+
+
 uint8_t R848_iniArray_hybrid[R848_REG_NUM] = {
                                                 0x00, 0x00, 0x40, 0x44, 0x17, 0x00, 0x06, 0xF0, 0x00, 0x41,
                                         //  0x08  0x09  0x0A  0x0B  0x0C  0x0D  0x0E  0x0F  0x10  0x11
@@ -71,22 +166,6 @@ R848_SectType R848_IMR_Data[5] = {
                                                   {0, 0, 0, 0}
                                                 };//Please keep this array data for standby mode.
 
-
-
-/*
- * Static constants
- */
-
-/* Those initial values start from R848_REG_SHADOW_START */
-static const uint8_t r848_init_array[R848_NUM_REGS] = {
-};
-
-/* Tuner frequency ranges */
-static const struct r848_freq_range freq_ranges[] = {
-};
-
-static int r848_xtal_capacitor[][2] = {
-};
 
 /*
  * I2C read/write code and shadow registers logic
@@ -213,7 +292,6 @@ static int r848_read(struct r848_priv *priv, uint8_t reg, uint8_t *val, int len)
  */
 
 static int r848_set_tv_standard(struct r848_priv *priv, unsigned bw, R848_Standard_Type type, uint32_t delsys)
-
 {
 return 1;
 }
@@ -223,7 +301,13 @@ static int r848_read_gain(struct r848_priv *priv)
 return 1;
 }
 
-int r848_set_gain(struct r848_priv *priv, int set_manual_gain, int gain)
+
+int r848_set_gain(struct r848_priv *priv, int gain)
+{
+return 1;
+}
+
+int r848_set_gain_mode(struct r848_priv *priv, int set_manual_gain, int gain)
 {
 	int rc;
 	uint8_t buf[5];
@@ -231,11 +315,9 @@ int r848_set_gain(struct r848_priv *priv, int set_manual_gain, int gain)
 	uint8_t MixerGain = 0;
 	uint8_t RfGain = 0;
 	uint8_t LnaGain = 0;
-	I2C_TYPE  R848_I2C;
-	I2C_LEN_TYPE R848_I2C_Len;
 
 
-	printf("Setting gain to %d with autogain %d\n", gain, set_manual_gain);
+	printf("Setting gain to %d with manual_gain flag  %d\n", gain, set_manual_gain);
 
 	if(set_manual_gain)
 	{
@@ -288,32 +370,33 @@ int r848_set_gain(struct r848_priv *priv, int set_manual_gain, int gain)
 
 	}
 
-return 1;
+	return 1;
 }
 
 int r848_set_bandwidth(struct r848_priv *priv, int bw, uint32_t rate)
 {
-
 	int ret = 0, i;
 	uint8_t tuner_lock;
 	int satellite_system = 1;
 	uint32_t frequency = priv->int_freq;
 
-	R848_Set_Info R848_INFO;
+ 	R848_Info R848_INFO;
+
+	printf("Setting bandwidth to %d and rate to %d and freq to %d \n", bw ,rate, frequency);
 
 	/* failsafe */
 	R848_INFO.R848_Standard = R848_DVB_T2_8M_IF_5M;
 
-
 	if (satellite_system) {
-		R848_INFO.RF_KHz = frequency;
+		R848_INFO.RF_KHz = frequency/1000; //convert from Hz to KHz
 		R848_INFO.R848_Standard = R848_DVB_S;
-		R848_INFO.DVBS_BW = (rate/200*135+2000000)/1000*2;//unit KHz
+		R848_INFO.DVBS_BW = rate/1000;//unit KHz 
 		R848_INFO.R848_DVBS_OutputSignal_Mode = DIFFERENTIALOUT;
 		R848_INFO.R848_DVBS_AGC_Mode = AGC_NEGATIVE;
 
+	printf("Settings bandwidth to %d KHz and rate to %d Hz and freq to %d KHz  \n", R848_INFO.DVBS_BW, rate , R848_INFO.RF_KHz);
 		/* set pll data */
-		if(R848_DVBS_Setting(priv,R848_INFO) != RT_Success)
+		if(R848_DVBS_Setting(priv, R848_INFO) != RT_Success)
 			return RT_Fail;
 	} else {		
 		R848_INFO.RF_KHz = frequency / 1000;
@@ -337,28 +420,18 @@ int r848_set_bandwidth(struct r848_priv *priv, int bw, uint32_t rate)
 		
 	}
 
+	for (i = 0; i < 5; i++) {
+		ret = r848_get_lock_status(priv, &tuner_lock);
+		if(tuner_lock) {
+			printf("Tuner Locked.\n");
+			break;
+		} else {
+			//printf("Tuner not Locked!\n");
+		}
+		usleep(20);
+	}
 
-
-	//if (ret) {
-	//	printk("[r848_lock_n_wait] Tuner lock function Failed!\n");
-	//	goto exit;
-	//}
-	//for (i = 0; i < 5; i++) {
-	//	ret = r848_get_lock_status(priv, &tuner_lock);
-	//	if(tuner_lock) {
-	//		printf("Tuner Locked.\n");
-	//		break;
-	//	} else {
-	//		printf("Tuner not Locked!\n");
-	//	}
-	//	usleep(20);
-	//}
-
-exit:
 	return ret;
-
-
-
 }
 
 
@@ -388,13 +461,12 @@ int r848_init(struct r848_priv *priv)
 	rc = r848_write(priv, 0x08, R848_iniArray_dvbs, sizeof(R848_iniArray_dvbs));
 //	rc = r848_print_registers(priv);
 
-	printf("init tuner\n");
 	if (priv->inited == 1)
 		return 0;
 	priv->inited = 1;
-	printf("init tuner first time\n");
+	printf("initalizing tuner first time\n");
 
-	rc = r848_tf_check(priv);
+//	rc = r848_tf_check(priv);
 
 	//start IMR calibration
 
@@ -430,13 +502,12 @@ int r848_init(struct r848_priv *priv)
 	
 	priv->cfg->R848_pre_standard = R848_STD_SIZE;
 
-
-	printf("init tuner done\n");
+	printf("Initialized Tuner Done\n");
 
 	return rc;
 }
 
-static int r848_get_lock_status(struct r848_priv *priv, uint8_t *lock)
+int r848_get_lock_status(struct r848_priv *priv, uint8_t *lock)
 {
 	int rc;
 	uint8_t buf[3];
@@ -466,53 +537,6 @@ int r848_print_registers(struct r848_priv *priv)
 	printf (" %02x ",val[i]);
 	printf ("\n");
 	return 1;
-}
-
-//-----------------------------------------------------------------------------------/ 
-// Purpose: read multiple IMC results for stability
-// input: IMR_Reg: IMC result address
-//        IMR_Result_Data: result 
-// output: TRUE or FALSE
-//-----------------------------------------------------------------------------------/
-static int R848_Muti_Read( struct r848_priv *priv,uint8_t* IMR_Result_Data)
-{
-	uint8_t ReadCunt     = 0;
-	uint16_t ReadAmount  = 0;
-	uint8_t ReadMax = 0;
-	uint8_t ReadMin = 255;
-	uint8_t ReadData = 0;
-	I2C_LEN_TYPE R848_I2C_Len;
-
-	uint8_t buf[2];
-	int ret;
-
-
-    //msleep(3);//3
-
-	for(ReadCunt = 0; ReadCunt < 3; ReadCunt ++) {
-#if 0
-		R848_I2C_Len.RegAddr = 0x00;
-		R848_I2C_Len.Len = 2;              // read 0x01
-		if(I2C_Read_Len(priv,&R848_I2C_Len) != RT_Success)
-		{
-			I2C_Read_Len(priv,&R848_I2C_Len);
-		}
-#endif
-		//ret = r848_rdm(priv, 0x00, buf, 2);
-		//ReadData = (buf[1] & 0x3f);
-		
-		ReadAmount = ReadAmount + (uint16_t)ReadData;
-		
-		if(ReadData < ReadMin)
-			ReadMin = ReadData;
-		
-        if(ReadData > ReadMax)
-			ReadMax = ReadData;
-	}
-	*IMR_Result_Data = (uint8_t) (ReadAmount - (uint16_t)ReadMax - (uint16_t)ReadMin);
-
-
-	return RT_Success;
 }
 
 R848_Freq_Info_Type R848_Freq_Sel(uint32_t LO_freq, uint32_t RF_freq,R848_Standard_Type R848_Standard)
@@ -1095,9 +1119,8 @@ int r848_set_freq(struct r848_priv *priv,uint32_t LO_Freq)
 
 	uint8_t	R848_XtalDiv = XTAL_DIV2;
 
-	
-	I2C_TYPE  R848_I2C;
-	I2C_LEN_TYPE R848_I2C_Len;
+	if (LO_Freq != 0)
+		printf("Setting frequency to %d khz\n ", LO_Freq);
 
 	//TF, NA fix
 	u1RfFlag = (priv->cfg->R848_Array[14] & 0x01);         //R22[0]
@@ -1233,7 +1256,7 @@ int r848_set_freq(struct r848_priv *priv,uint32_t LO_Freq)
 	//Xtal Div
 	if(R848_Standard == R848_STD_SIZE) //for cal
 	{
-		    R848_XtalDiv = XTAL_DIV1;
+		R848_XtalDiv = XTAL_DIV1;
 	        priv->cfg->R848_Array[16] = priv->cfg->R848_Array[16] & 0xFB; //b2=0  // R848:R24[2]   
 	        PLL_Ref = R848_XTAL;
 	}
@@ -1256,7 +1279,6 @@ int r848_set_freq(struct r848_priv *priv,uint32_t LO_Freq)
 				
 			}	
 	}
-
 	r848_write_reg(priv, 0x18, priv->cfg->R848_Array[16]);
 
 
@@ -1400,7 +1422,6 @@ R848_ErrCode R848_MUX( struct r848_priv *priv,uint32_t LO_KHz, uint32_t RF_KHz, 
 	uint8_t Reg08_IMR_Gain   = 0;
 	uint8_t Reg09_IMR_Phase  = 0;
 	uint8_t Reg03_IMR_Iqcap  = 0;
-	I2C_TYPE  R848_I2C;
 	Freq_Info1 = R848_Freq_Sel(LO_KHz, RF_KHz, R848_Standard);
 
 
@@ -1449,7 +1470,42 @@ R848_ErrCode R848_MUX( struct r848_priv *priv,uint32_t LO_KHz, uint32_t RF_KHz, 
 }
 
 
+//-----------------------------------------------------------------------------------/ 
+// Purpose: read multiple IMC results for stability
+// input: IMR_Reg: IMC result address
+//        IMR_Result_Data: result 
+// output: TRUE or FALSE
+//-----------------------------------------------------------------------------------/
+int R848_Muti_Read( struct r848_priv *priv, uint8_t* IMR_Result_Data)
+{
+	uint8_t ReadCunt     = 0;
+	uint16_t ReadAmount  = 0;
+	uint8_t ReadMax = 0;
+	uint8_t ReadMin = 255;
+	uint8_t ReadData = 0;
 
+	uint8_t buf[2];
+	int ret;
+
+
+    usleep(3);//3
+
+	for(ReadCunt = 0; ReadCunt < 3; ReadCunt ++) {
+		r848_read(priv, 0x00, buf, 2);
+		ReadData = (buf[1] & 0x3f);
+		
+		ReadAmount = ReadAmount + (uint16_t)ReadData;
+		
+		if(ReadData < ReadMin)
+			ReadMin = ReadData;
+		
+        if(ReadData > ReadMax)
+			ReadMax = ReadData;
+	}
+	*IMR_Result_Data = (uint8_t) (ReadAmount - (uint16_t)ReadMax - (uint16_t)ReadMin);
+
+	return RT_Success;
+}
 
 //-----------------------------------------------------------------------------------/ 
 // Purpose: compare IMC result aray [0][1][2], find min value and store to CorArry[0]
@@ -1490,11 +1546,66 @@ R848_ErrCode R848_IMR_Cross( struct r848_priv *priv,R848_SectType* IQ_Pont, uint
 //-------------------------------------------------------------------------------------//
 R848_ErrCode R848_CompreStep( struct r848_priv *priv,R848_SectType* StepArry, uint8_t Pace)
 {
+	R848_SectType StepTemp;
+	
+	//min value already saved in StepArry[0]
+	StepTemp.Phase_Y = StepArry[0].Phase_Y;
+	StepTemp.Gain_X  = StepArry[0].Gain_X;
+
+	while(((StepTemp.Gain_X & 0x1F) < IMR_TRIAL) && ((StepTemp.Phase_Y & 0x1F) < IMR_TRIAL))  //5->10
+	{
+		if(Pace == 0x08)
+			StepTemp.Gain_X ++;
+		else
+			StepTemp.Phase_Y ++;
+	
+		r848_write_reg(priv, 0x08, StepTemp.Gain_X);
+		r848_write_reg(priv, 0x09, StepTemp.Phase_Y);
+
+		if(R848_Muti_Read(priv,&StepTemp.Value) != RT_Success)
+			return RT_Fail;
+
+		if(StepTemp.Value <= StepArry[0].Value)
+		{
+			StepArry[0].Gain_X  = StepTemp.Gain_X;
+			StepArry[0].Phase_Y = StepTemp.Phase_Y;
+			StepArry[0].Value   = StepTemp.Value;
+		}
+		else
+		{
+			break;		
+		}
+		
+	} //end of while()
+	
 	return RT_Success;
 }
 
 R848_ErrCode R848_IMR_Iqcap( struct r848_priv *priv,R848_SectType* IQ_Point)   
 {
+    R848_SectType Compare_Temp;
+	int i = 0, ret;
+
+	r848_write_reg(priv, 0x10, IQ_Point->Gain_X);
+	r848_write_reg(priv, 0x11, IQ_Point->Phase_Y);
+
+	//try iqcap
+	for(i=0; i<3; i++)	
+	{
+		Compare_Temp.Iqcap = (uint8_t) i;  
+		priv->cfg->R848_Array[3] = (priv->cfg->R848_Array[3] & 0xFC) | Compare_Temp.Iqcap;  
+		r848_write_reg(priv, 0x0B,priv->cfg->R848_Array[3]);
+
+		if(R848_Muti_Read(priv,&(Compare_Temp.Value)) != RT_Success)
+			   return RT_Fail;
+
+		if(Compare_Temp.Value < IQ_Point->Value)
+		{
+			IQ_Point->Value = Compare_Temp.Value; 
+			IQ_Point->Iqcap = Compare_Temp.Iqcap;
+		}
+	}
+
     return RT_Success;
 }
 
@@ -1504,8 +1615,123 @@ R848_ErrCode R848_IQ( struct r848_priv *priv,R848_SectType* IQ_Pont)
 	int ret;
 	R848_SectType Compare_IQ[3];
 	uint8_t   VGA_Count = 0;
+	uint8_t   VGA_Read = 0;
+	uint8_t   X_Direction;  // 1:X, 0:Y
+
+
+	// increase VGA power to let image significant
+	for(VGA_Count=11; VGA_Count < 16; VGA_Count ++)
+	{
+		r848_write_reg(priv, 0x14, (priv->cfg->R848_Array[12] & 0xF0) + VGA_Count);
+
+		usleep(10); //
+		
+		if(R848_Muti_Read(priv,&VGA_Read) != RT_Success)
+			return RT_Fail;
+
+		if(VGA_Read > 40)
+			break;
+	}
+
+	Compare_IQ[0].Gain_X  = priv->cfg->R848_Array[8] & 0xC0; // R16[5:0]  
+	Compare_IQ[0].Phase_Y = priv->cfg->R848_Array[9] & 0xC0; // R17[5:0] 
+	//Compare_IQ[0].Iqcap = R848_iniArray[3] & 0xFC;
+
+	    // Determine X or Y
+	    if(R848_IMR_Cross(priv,&Compare_IQ[0], &X_Direction) != RT_Success)
+			return RT_Fail;
+
+		if(X_Direction==1)
+		{
+			//compare and find min of 3 points. determine I/Q direction
+		    if(R848_CompreCor(priv,&Compare_IQ[0]) != RT_Success)
+			  return RT_Fail;
+
+		    //increase step to find min value of this direction
+		    if(R848_CompreStep(priv,&Compare_IQ[0], 0x10) != RT_Success)  //X
+			  return RT_Fail;	
+		}
+		else
+		{
+		   //compare and find min of 3 points. determine I/Q direction
+		   if(R848_CompreCor(priv,&Compare_IQ[0]) != RT_Success)
+		   	 return RT_Fail;
+
+		   //increase step to find min value of this direction
+		   if(R848_CompreStep(priv,&Compare_IQ[0], 0x11) != RT_Success)  //Y
+			 return RT_Fail;	
+		}
+
+		//Another direction
+		if(X_Direction==1)
+		{	    
+           if(R848_IQ_Tree(priv,Compare_IQ[0].Gain_X, Compare_IQ[0].Phase_Y, 0x10, &Compare_IQ[0]) != RT_Success) //Y	
+		     return RT_Fail;	
+
+		   //compare and find min of 3 points. determine I/Q direction
+		   if(R848_CompreCor(priv,&Compare_IQ[0]) != RT_Success)
+		   	 return RT_Fail;
+
+		   //increase step to find min value of this direction
+		   if(R848_CompreStep(priv,&Compare_IQ[0], 0x11) != RT_Success)  //Y
+			 return RT_Fail;	
+		}
+		else
+		{
+		   if(R848_IQ_Tree(priv,Compare_IQ[0].Phase_Y, Compare_IQ[0].Gain_X, 0x11, &Compare_IQ[0]) != RT_Success) //X
+		     return RT_Fail;	
+        
+		   //compare and find min of 3 points. determine I/Q direction
+		   if(R848_CompreCor(priv,&Compare_IQ[0]) != RT_Success)
+		     return RT_Fail;
+
+	       //increase step to find min value of this direction
+		   if(R848_CompreStep(priv,&Compare_IQ[0], 0x10) != RT_Success) //X
+		     return RT_Fail;	
+		}
+		
+
+		//--- Check 3 points again---//
+		if(X_Direction==1)
+		{
+		    if(R848_IQ_Tree(priv,Compare_IQ[0].Phase_Y, Compare_IQ[0].Gain_X, 0x11, &Compare_IQ[0]) != RT_Success) //X
+			  return RT_Fail;	
+		}
+		else
+		{
+		   if(R848_IQ_Tree(priv,Compare_IQ[0].Gain_X, Compare_IQ[0].Phase_Y, 0x10, &Compare_IQ[0]) != RT_Success) //Y
+			return RT_Fail;		
+		}
+
+		if(R848_CompreCor(priv,&Compare_IQ[0]) != RT_Success)
+			return RT_Fail;
+
+    //Section-9 check
+	if(R848_Section(priv,&Compare_IQ[0]) != RT_Success)
+			return RT_Fail;
+
+	//clear IQ_Cap = 0   //  R11[1:0]  
+	Compare_IQ[0].Iqcap = priv->cfg->R848_Array[3] & 0xFC;
+
+	if(R848_IMR_Iqcap(priv,&Compare_IQ[0]) != RT_Success)
+			return RT_Fail;
+
+	*IQ_Pont = Compare_IQ[0];
+
+	//reset gain/phase/iqcap control setting
+	priv->cfg->R848_Array[8] = priv->cfg->R848_Array[8] & 0xC0;
+	r848_write_reg(priv, 0x10, priv->cfg->R848_Array[8]);
+
+	priv->cfg->R848_Array[9] = priv->cfg->R848_Array[9] & 0xC0;
+	r848_write_reg(priv, 0x11, priv->cfg->R848_Array[9]);
+
+	priv->cfg->R848_Array[3] = priv->cfg->R848_Array[3] & 0xFC;
+	r848_write_reg(priv, 0x0b, priv->cfg->R848_Array[3]);
+	
 	return RT_Success;
 }
+
+
 
 //----------------------------------------------------------------------------------------//
 // purpose: search surrounding points from previous point 
@@ -1516,42 +1742,711 @@ R848_ErrCode R848_IQ( struct r848_priv *priv,R848_SectType* IQ_Pont)
 //----------------------------------------------------------------------------------------//
 R848_ErrCode R848_F_IMR( struct r848_priv *priv,R848_SectType* IQ_Pont)
 {
+	int ret;
+	R848_SectType Compare_IQ[3];
+	R848_SectType Compare_Bet[3];
+	uint8_t VGA_Count = 0;
+	uint8_t VGA_Read = 0;
+
+	//VGA
+	for(VGA_Count=11; VGA_Count < 16; VGA_Count ++)
+	{
+		r848_write_reg(priv, 0x14, (priv->cfg->R848_Array[12] & 0xF0) + VGA_Count);
+
+		usleep(10);
+		
+		if(R848_Muti_Read(priv,&VGA_Read) != RT_Success)
+			return RT_Fail;
+
+		if(VGA_Read > 40)
+		break;
+	}
+
+	//Try X-1 column and save min result to Compare_Bet[0]
+	if((IQ_Pont->Gain_X & 0x1F) == 0x00)
+	{
+		Compare_IQ[0].Gain_X = ((IQ_Pont->Gain_X) & 0xDF) + 1;  //Q-path, Gain=1
+	}
+	else
+	{
+		Compare_IQ[0].Gain_X  = IQ_Pont->Gain_X - 1;  //left point
+	}
+	Compare_IQ[0].Phase_Y = IQ_Pont->Phase_Y;
+
+	if(R848_IQ_Tree(priv,Compare_IQ[0].Gain_X, Compare_IQ[0].Phase_Y, 0x10, &Compare_IQ[0]) != RT_Success)  // y-direction
+		return RT_Fail;	
+
+	if(R848_CompreCor(priv,&Compare_IQ[0]) != RT_Success)
+		return RT_Fail;
+
+	Compare_Bet[0].Gain_X = Compare_IQ[0].Gain_X;
+	Compare_Bet[0].Phase_Y = Compare_IQ[0].Phase_Y;
+	Compare_Bet[0].Value = Compare_IQ[0].Value;
+
+	//Try X column and save min result to Compare_Bet[1]
+	Compare_IQ[0].Gain_X = IQ_Pont->Gain_X;
+	Compare_IQ[0].Phase_Y = IQ_Pont->Phase_Y;
+
+	if(R848_IQ_Tree(priv,Compare_IQ[0].Gain_X, Compare_IQ[0].Phase_Y, 0x10, &Compare_IQ[0]) != RT_Success)
+		return RT_Fail;	
+
+	if(R848_CompreCor(priv,&Compare_IQ[0]) != RT_Success)
+		return RT_Fail;
+
+	Compare_Bet[1].Gain_X = Compare_IQ[0].Gain_X;
+	Compare_Bet[1].Phase_Y = Compare_IQ[0].Phase_Y;
+	Compare_Bet[1].Value = Compare_IQ[0].Value;
+
+	//Try X+1 column and save min result to Compare_Bet[2]
+	if((IQ_Pont->Gain_X & 0x1F) == 0x00)		
+		Compare_IQ[0].Gain_X = ((IQ_Pont->Gain_X) | 0x20) + 1;  //I-path, Gain=1
+	else
+	    Compare_IQ[0].Gain_X = IQ_Pont->Gain_X + 1;
+	Compare_IQ[0].Phase_Y = IQ_Pont->Phase_Y;
+
+	if(R848_IQ_Tree(priv,Compare_IQ[0].Gain_X, Compare_IQ[0].Phase_Y, 0x10, &Compare_IQ[0]) != RT_Success)
+		return RT_Fail;		
+
+	if(R848_CompreCor(priv,&Compare_IQ[0]) != RT_Success)
+		return RT_Fail;
+
+	Compare_Bet[2].Gain_X = Compare_IQ[0].Gain_X;
+	Compare_Bet[2].Phase_Y = Compare_IQ[0].Phase_Y;
+	Compare_Bet[2].Value = Compare_IQ[0].Value;
+
+	if(R848_CompreCor(priv,&Compare_Bet[0]) != RT_Success)
+		return RT_Fail;
+
+	//clear IQ_Cap = 0
+	Compare_Bet[0].Iqcap = priv->cfg->R848_Array[3] & 0xFC;	//  R11[1:0] 
+
+	if(R848_IMR_Iqcap(priv,&Compare_Bet[0]) != RT_Success)
+		return RT_Fail;
+
+	*IQ_Pont = Compare_Bet[0];
+	
 	return RT_Success;
 }
 
 
 R848_ErrCode R848_SetTF( struct r848_priv *priv,uint32_t u4FreqKHz, uint8_t u1TfType)
 {
+	int ret;
+	uint8_t    u1FreqCount = 0;
+	uint32_t   u4Freq1 = 0;
+	uint32_t   u4Freq2 = 0;
+	uint32_t   u4Ratio;
+	uint8_t    u1TF_Set_Result1 = 0;
+	uint8_t    u1TF_Set_Result2 = 0;
+	uint8_t    u1TF_tmp1, u1TF_tmp2;
+	uint8_t    u1TFCalNum = R848_TF_HIGH_NUM;
+	uint8_t  R848_TF = 0;
+
+	if(u4FreqKHz<R848_LNA_LOW_LOWEST[R848_TF_BEAD])  //Ultra Low
+	{
+		 u1TFCalNum = R848_TF_LOWEST_NUM;
+         while((u4FreqKHz < R848_TF_Freq_Lowest[u1TfType][u1FreqCount]) && (u1FreqCount<R848_TF_LOWEST_NUM))
+		 {
+            u1FreqCount++;
+		 }
+
+		 if(u1FreqCount==0)
+		 {
+			 R848_TF = R848_TF_Result_Lowest[u1TfType][0];
+		 }
+		 else if(u1FreqCount==R848_TF_LOWEST_NUM)
+         {
+			 R848_TF = R848_TF_Result_Lowest[u1TfType][R848_TF_LOWEST_NUM-1];
+		 }
+		 else
+		 {
+			 u1TF_Set_Result1 = R848_TF_Result_Lowest[u1TfType][u1FreqCount-1]; 
+		     u1TF_Set_Result2 = R848_TF_Result_Lowest[u1TfType][u1FreqCount]; 
+		     u4Freq1 = R848_TF_Freq_Lowest[u1TfType][u1FreqCount-1];
+		     u4Freq2 = R848_TF_Freq_Lowest[u1TfType][u1FreqCount]; 
+
+			 //u4Ratio = (u4Freq1- u4FreqKHz)*100/(u4Freq1 - u4Freq2);
+             //R848_TF = u1TF_Set_Result1 + (uint8_t)((u1TF_Set_Result2 - u1TF_Set_Result1)*u4Ratio/100);
+
+			 u1TF_tmp1 = ((u1TF_Set_Result1 & 0x40)>>2)*3 + (u1TF_Set_Result1 & 0x3F);  //b6 is 3xb4
+			 u1TF_tmp2 = ((u1TF_Set_Result2 & 0x40)>>2)*3 + (u1TF_Set_Result2 & 0x3F);			 
+			 u4Ratio = (u4Freq1- u4FreqKHz)*100/(u4Freq1 - u4Freq2);
+			 R848_TF = u1TF_tmp1 + (uint8_t)((u1TF_tmp2 - u1TF_tmp1)*u4Ratio/100);
+			 if(R848_TF>=0x40)
+				 R848_TF = (R848_TF + 0x10);
+
+		 }
+	}
+	else if((u4FreqKHz>=R848_LNA_LOW_LOWEST[R848_TF_BEAD]) && (u4FreqKHz<R848_LNA_MID_LOW[R848_TF_BEAD]))  //Low
+	{
+		 u1TFCalNum = R848_TF_LOW_NUM;
+         while((u4FreqKHz < R848_TF_Freq_Low[u1TfType][u1FreqCount]) && (u1FreqCount<R848_TF_LOW_NUM))
+		 {
+            u1FreqCount++;
+		 }
+
+		 if(u1FreqCount==0)
+		 {
+			 R848_TF = R848_TF_Result_Low[u1TfType][0];
+		 }
+		 else if(u1FreqCount==R848_TF_LOW_NUM)
+        {
+			 R848_TF = R848_TF_Result_Low[u1TfType][R848_TF_LOW_NUM-1];
+		 }
+		 else
+		 {
+			 u1TF_Set_Result1 = R848_TF_Result_Low[u1TfType][u1FreqCount-1]; 
+		     u1TF_Set_Result2 = R848_TF_Result_Low[u1TfType][u1FreqCount]; 
+		     u4Freq1 = R848_TF_Freq_Low[u1TfType][u1FreqCount-1];
+		     u4Freq2 = R848_TF_Freq_Low[u1TfType][u1FreqCount]; 
+
+			 //u4Ratio = (u4Freq1- u4FreqKHz)*100/(u4Freq1 - u4Freq2);
+             //R848_TF = u1TF_Set_Result1 + (uint8_t)((u1TF_Set_Result2 - u1TF_Set_Result1)*u4Ratio/100);
+
+			 u1TF_tmp1 = ((u1TF_Set_Result1 & 0x40)>>2) + (u1TF_Set_Result1 & 0x3F);  //b6 is 1xb4
+			 u1TF_tmp2 = ((u1TF_Set_Result2 & 0x40)>>2) + (u1TF_Set_Result2 & 0x3F);			 
+			 u4Ratio = (u4Freq1- u4FreqKHz)*100/(u4Freq1 - u4Freq2);
+			 R848_TF = u1TF_tmp1 + (uint8_t)((u1TF_tmp2 - u1TF_tmp1)*u4Ratio/100);
+			 if(R848_TF>=0x40)
+				 R848_TF = (R848_TF + 0x30);
+		 }
+	}
+	else if((u4FreqKHz>=R848_LNA_MID_LOW[R848_TF_BEAD]) && (u4FreqKHz<R848_LNA_HIGH_MID[R848_TF_BEAD]))  //Mid
+    {
+		 u1TFCalNum = R848_TF_MID_NUM;
+         while((u4FreqKHz < R848_TF_Freq_Mid[u1TfType][u1FreqCount]) && (u1FreqCount<R848_TF_MID_NUM))
+		 {
+            u1FreqCount++;
+		 }
+
+		 if(u1FreqCount==0)
+		 {
+			 R848_TF = R848_TF_Result_Mid[u1TfType][0];
+		 }
+		 else if(u1FreqCount==R848_TF_MID_NUM)
+        {
+			 R848_TF = R848_TF_Result_Mid[u1TfType][R848_TF_MID_NUM-1];
+		 }
+		 else
+		 {
+			 u1TF_Set_Result1 = R848_TF_Result_Mid[u1TfType][u1FreqCount-1]; 
+		     u1TF_Set_Result2 = R848_TF_Result_Mid[u1TfType][u1FreqCount]; 
+		     u4Freq1 = R848_TF_Freq_Mid[u1TfType][u1FreqCount-1];
+		     u4Freq2 = R848_TF_Freq_Mid[u1TfType][u1FreqCount]; 
+			 u4Ratio = (u4Freq1- u4FreqKHz)*100/(u4Freq1 - u4Freq2);
+             R848_TF = u1TF_Set_Result1 + (uint8_t)((u1TF_Set_Result2 - u1TF_Set_Result1)*u4Ratio/100);
+		 }
+	}
+	else  //HIGH
+	{
+		 u1TFCalNum = R848_TF_HIGH_NUM;
+         while((u4FreqKHz < R848_TF_Freq_High[u1TfType][u1FreqCount]) && (u1FreqCount<R848_TF_HIGH_NUM))
+		 {
+            u1FreqCount++;
+		 }
+
+		 if(u1FreqCount==0)
+		 {
+			 R848_TF = R848_TF_Result_High[u1TfType][0];
+		 }
+		 else if(u1FreqCount==R848_TF_HIGH_NUM)
+        {
+			 R848_TF = R848_TF_Result_High[u1TfType][R848_TF_HIGH_NUM-1];
+		 }
+		 else
+		 {
+			 u1TF_Set_Result1 = R848_TF_Result_High[u1TfType][u1FreqCount-1]; 
+		     u1TF_Set_Result2 = R848_TF_Result_High[u1TfType][u1FreqCount]; 
+		     u4Freq1 = R848_TF_Freq_High[u1TfType][u1FreqCount-1];
+		     u4Freq2 = R848_TF_Freq_High[u1TfType][u1FreqCount]; 
+			 u4Ratio = (u4Freq1- u4FreqKHz)*100/(u4Freq1 - u4Freq2);
+             R848_TF = u1TF_Set_Result1 + (uint8_t)((u1TF_Set_Result2 - u1TF_Set_Result1)*u4Ratio/100);
+		 }
+	}
+  
+	// R8[6:0] 
+	priv->cfg->R848_Array[0] = (priv->cfg->R848_Array[0] & 0x80) | R848_TF;
+	r848_write_reg(priv, 0x0b, priv->cfg->R848_Array[0]);
+
     return RT_Success;
 }
 
-R848_ErrCode R848_IMR( struct r848_priv *priv,uint8_t IMR_MEM, bool IM_Flag)
+R848_ErrCode R848_IMR( struct r848_priv *priv,uint8_t IMR_MEM, int IM_Flag)
 {
+	uint32_t RingVCO = 0;
+	uint32_t RingFreq = 0;
+	uint8_t  u1MixerGain = 8;
+
+	R848_SectType IMR_POINT;
+
+	RingVCO = 3200000;
+	priv->cfg->R848_Array[31] &= 0x3F;   //clear ring_div1, R24[7:6]	//R848:R39[7:6]  39-8=31  39(0x27) is addr ; [31] is data 
+	priv->cfg->R848_Array[25] &= 0xFC;   //clear ring_div2, R25[1:0]	//R848:R33[1:0]  33-8=25  33(0x21) is addr ; [25] is data 
+	priv->cfg->R848_Array[25] &= 0xDF;   //clear vco_band, R25[5]		//R848:R33[5]    33-8=25  33(0x21) is addr ; [25] is data 
+	priv->cfg->R848_Array[31] &= 0xC3;   //clear ring_div_num, R24[3:0]//R848:R39[5:2]  39-8=31  39(0x27) is addr ; [31] is data
+
+	switch(IMR_MEM)
+	{
+	case 0: // RingFreq = 66.66M
+		RingFreq = RingVCO/48;
+		priv->cfg->R848_Array[31] |= 0x80;  // ring_div1 /6 (2)
+		priv->cfg->R848_Array[25] |= 0x03;  // ring_div2 /8 (3)		
+		priv->cfg->R848_Array[25] |= 0x00;  // vco_band = 0 (high)
+        priv->cfg->R848_Array[31] |= 0x24;  // ring_div_num = 9
+		u1MixerGain = 8;
+		break;
+	case 1: // RingFreq = 200M
+		RingFreq = RingVCO/16;
+		priv->cfg->R848_Array[31] |= 0x00;  // ring_div1 /4 (0)
+		priv->cfg->R848_Array[25] |= 0x02;  // ring_div2 /4 (2)		
+		priv->cfg->R848_Array[25] |= 0x00;  // vco_band = 0 (high)
+        priv->cfg->R848_Array[31] |= 0x24;  // ring_div_num = 9
+		u1MixerGain = 6;
+		break;
+	case 2: // RingFreq = 400M
+		RingFreq = RingVCO/8;
+		priv->cfg->R848_Array[31] |= 0x00;  // ring_div1 /4 (0)
+		priv->cfg->R848_Array[25] |= 0x01;  // ring_div2 /2 (1)		
+		priv->cfg->R848_Array[25] |= 0x00;  // vco_band = 0 (high)
+        priv->cfg->R848_Array[31] |= 0x24;  // ring_div_num = 9
+		u1MixerGain = 6;
+		break;
+	case 3: // RingFreq = 533.33M
+		RingFreq = RingVCO/6;
+		priv->cfg->R848_Array[31] |= 0x80;  // ring_div1 /6 (2)
+		priv->cfg->R848_Array[25] |= 0x00;  // ring_div2 /1 (0)		
+		priv->cfg->R848_Array[25] |= 0x00;  // vco_band = 0 (high)
+        priv->cfg->R848_Array[31] |= 0x24;  // ring_div_num = 9
+		u1MixerGain = 8;
+		break;
+	case 4: // RingFreq = 800M
+		RingFreq = RingVCO/4;
+		priv->cfg->R848_Array[31] |= 0x00;  // ring_div1 /4 (0)
+		priv->cfg->R848_Array[25] |= 0x00;  // ring_div2 /1 (0)		
+		priv->cfg->R848_Array[25] |= 0x00;  // vco_band = 0 (high)
+        priv->cfg->R848_Array[31] |= 0x24;  // ring_div_num = 9
+		u1MixerGain = 8;
+		break;
+	default:
+		RingFreq = RingVCO/4;
+		priv->cfg->R848_Array[31] |= 0x00;  // ring_div1 /4 (0)
+		priv->cfg->R848_Array[25] |= 0x00;  // ring_div2 /1 (0)		
+		priv->cfg->R848_Array[25] |= 0x00;  // vco_band = 0 (high)
+        priv->cfg->R848_Array[31] |= 0x24;  // ring_div_num = 9
+		u1MixerGain = 8;
+		break;
+	}
+
+	//Mixer Amp Gain
+	priv->cfg->R848_Array[7] = (priv->cfg->R848_Array[7] & 0xE0) | u1MixerGain; 
+	r848_write_reg(priv, 0x0F, priv->cfg->R848_Array[7]);
+
+	//write I2C to set RingPLL
+	r848_write_reg(priv, 0x27, priv->cfg->R848_Array[31]);
+	
+	r848_write_reg(priv, 0x21, priv->cfg->R848_Array[25]);
+
+	//Ring PLL power
+	//if((RingFreq>=0) && (RingFreq<R848_RING_POWER_FREQ_LOW))
+	if(((RingFreq<R848_RING_POWER_FREQ_LOW)||(RingFreq>R848_RING_POWER_FREQ_HIGH)))  //R848:R33[3:2] 
+         priv->cfg->R848_Array[25] = (priv->cfg->R848_Array[25] & 0xF3) | 0x08;   //R25[3:2]=2'b10; min_lp
+	else
+        priv->cfg->R848_Array[25] = (priv->cfg->R848_Array[25] & 0xF3) | 0x00;   //R25[3:2]=2'b00; min
+	r848_write_reg(priv, 0x21, priv->cfg->R848_Array[25]);
+
+	//Must do MUX before PLL() 
+	if(R848_MUX(priv,RingFreq - R848_IMR_IF, RingFreq, R848_STD_SIZE) != RT_Success)      //IMR MUX (LO, RF)
+		return RT_Fail;
+
+	if(r848_set_freq(priv,(RingFreq - R848_IMR_IF)) != RT_Success)  //IMR PLL
+	    return RT_Fail;
+
+	//Set TF, place after R848_MUX( )
+	//TF is dependent to LNA/Mixer Gain setting
+	if(R848_SetTF(priv,RingFreq, (uint8_t)R848_TF_BEAD) != RT_Success)
+		return RT_Fail;
+
+	//clear IQ_cap
+	IMR_POINT.Iqcap = priv->cfg->R848_Array[3] & 0xFC; // R848:R11[1:0] 
+
+	if(IM_Flag == 0)
+	{
+	     if(R848_IQ(priv,&IMR_POINT) != RT_Success)
+		    return RT_Fail;
+	}
+	else
+	{
+		IMR_POINT.Gain_X = R848_IMR_Data[3].Gain_X;
+		IMR_POINT.Phase_Y = R848_IMR_Data[3].Phase_Y;
+		IMR_POINT.Value = R848_IMR_Data[3].Value;
+		//IMR_POINT.Iqcap = R848_IMR_Data[3].Iqcap;
+		if(R848_F_IMR(priv,&IMR_POINT) != RT_Success)
+			return RT_Fail;
+	}
+
+	//Save IMR Value
+	switch(IMR_MEM)
+	{
+	case 0:
+		R848_IMR_Data[0].Gain_X  = IMR_POINT.Gain_X;
+		R848_IMR_Data[0].Phase_Y = IMR_POINT.Phase_Y;
+		R848_IMR_Data[0].Value = IMR_POINT.Value;
+		R848_IMR_Data[0].Iqcap = IMR_POINT.Iqcap;		
+		break;
+	case 1:
+		R848_IMR_Data[1].Gain_X  = IMR_POINT.Gain_X;
+		R848_IMR_Data[1].Phase_Y = IMR_POINT.Phase_Y;
+		R848_IMR_Data[1].Value = IMR_POINT.Value;
+		R848_IMR_Data[1].Iqcap = IMR_POINT.Iqcap;
+		break;
+	case 2:
+		R848_IMR_Data[2].Gain_X  = IMR_POINT.Gain_X;
+		R848_IMR_Data[2].Phase_Y = IMR_POINT.Phase_Y;
+		R848_IMR_Data[2].Value = IMR_POINT.Value;
+		R848_IMR_Data[2].Iqcap = IMR_POINT.Iqcap;
+		break;
+	case 3:
+		R848_IMR_Data[3].Gain_X  = IMR_POINT.Gain_X;
+		R848_IMR_Data[3].Phase_Y = IMR_POINT.Phase_Y;
+		R848_IMR_Data[3].Value = IMR_POINT.Value;
+		R848_IMR_Data[3].Iqcap = IMR_POINT.Iqcap;
+		break;
+	case 4:
+		R848_IMR_Data[4].Gain_X  = IMR_POINT.Gain_X;
+		R848_IMR_Data[4].Phase_Y = IMR_POINT.Phase_Y;
+		R848_IMR_Data[4].Value = IMR_POINT.Value;
+		R848_IMR_Data[4].Iqcap = IMR_POINT.Iqcap;
+		break;
+    default:
+		R848_IMR_Data[4].Gain_X  = IMR_POINT.Gain_X;
+		R848_IMR_Data[4].Phase_Y = IMR_POINT.Phase_Y;
+		R848_IMR_Data[4].Value = IMR_POINT.Value;
+		R848_IMR_Data[4].Iqcap = IMR_POINT.Iqcap;
+		break;
+	}
+	return RT_Success;
+}
+
+R848_ErrCode R848_SetStandard(struct r848_priv *priv,R848_Standard_Type RT_Standard)
+{
+	int i=0,rc ;
+
+	// Filter Calibration
+	uint8_t u1FilCalGap = 8;
+
+
+	uint8_t R848_Fil_Cal_flag[R848_STD_SIZE];
+	uint8_t R848_Fil_Cal_BW[R848_STD_SIZE];
+	uint8_t R848_Fil_Cal_code[R848_STD_SIZE];
+
+	for (i=0; i<R848_STD_SIZE; i++) {
+		R848_Fil_Cal_flag[i] = 1;
+		R848_Fil_Cal_code[i] = 0;
+		R848_Fil_Cal_BW[i] = 0x00;
+	}
+
+	if(RT_Standard != priv->cfg->R848_pre_standard)
+	{
+	        rc = r848_write(priv, 0x08, R848_iniArray_dvbs, sizeof(R848_iniArray_dvbs));
+	}
+
+//	priv->cfg->Sys_Info1 = R848_Sys_Sel(priv, RT_Standard);
+
+	// Filter Calibration
+
+
+   if(R848_Fil_Cal_flag[RT_Standard] == 1)
+	{
+		R848_Fil_Cal_code[RT_Standard] = R848_Filt_Cal_ADC(priv, priv->cfg->Sys_Info1.FILT_CAL_IF, priv->cfg->Sys_Info1.BW, u1FilCalGap);
+		R848_Fil_Cal_BW[RT_Standard] = 0;// R848_Bandwidth;
+		R848_Fil_Cal_flag[RT_Standard] = 0;
+
+	    //Reset register and Array 
+	
+        rc = r848_write(priv, 0x08, R848_iniArray_dvbs, sizeof(R848_iniArray_dvbs));
+	}
+
+	// Set Filter Auto Ext
+	priv->cfg->R848_Array[11] = (priv->cfg->R848_Array[11] & 0xEF) | priv->cfg->Sys_Info1.FILT_EXT_ENA;  
+        r848_write_reg(priv, 0x13, priv->cfg->R848_Array[11]);
+
+
+	if(priv->cfg->Sys_Info1.FILT_EXT_ENA==0x10)  //(%)
+	{
+		
+			 if(R848_Fil_Cal_code[RT_Standard]< 2)  
+			   R848_Fil_Cal_code[RT_Standard] = 2;
+		
+			 if((priv->cfg->Sys_Info1.FILT_EXT_POINT & 0x02)==0x02)  //HPF+3
+			 {
+				  if(priv->cfg->Sys_Info1.HPF_COR>12)  
+				  {    priv->cfg->Sys_Info1.HPF_COR = 12; }
+			 }
+			 else  //HPF+1
+			 {
+				  if(priv->cfg->Sys_Info1.HPF_COR>14)  
+				  {    priv->cfg->Sys_Info1.HPF_COR = 15; }		 
+			 }		  			
+	}
+
+
+	// Set LPF fine code
+	priv->cfg->R848_Array[10] = (priv->cfg->R848_Array[10] & 0xF0) | R848_Fil_Cal_code[RT_Standard];  
+        r848_write_reg(priv, 0x12, priv->cfg->R848_Array[10]);
+
+	// Set LPF coarse BW
+	priv->cfg->R848_Array[11] = (priv->cfg->R848_Array[11] & 0x9F) | R848_Fil_Cal_BW[RT_Standard];
+        r848_write_reg(priv, 0x13, priv->cfg->R848_Array[11]);
+	
+	// Set HPF corner & 1.7M mode
+	priv->cfg->R848_Array[11] = (priv->cfg->R848_Array[11] & 0x70) | priv->cfg->Sys_Info1.HPF_COR | priv->cfg->Sys_Info1.V17M;
+        r848_write_reg(priv, 0x13, priv->cfg->R848_Array[11]);
+
+
+	// Set TF current 
+	priv->cfg->R848_Array[3] = (priv->cfg->R848_Array[3] & 0xBF) | priv->cfg->Sys_Info1.TF_CUR;  
+        r848_write_reg(priv, 0x0B, priv->cfg->R848_Array[3]);
+
+	// Set Filter current 
+	priv->cfg->R848_Array[10] = (priv->cfg->R848_Array[10] & 0x9F) | priv->cfg->Sys_Info1.FILT_CUR;  
+	//R848_Array[10] = (R848_Array[10] & 0x9F) | 0x60;   //lowest
+        r848_write_reg(priv, 0x12, priv->cfg->R848_Array[10]);
+
+	// Set Switch Buffer current 
+	priv->cfg->R848_Array[4] = (priv->cfg->R848_Array[4] & 0xFB) | priv->cfg->Sys_Info1.SWBUF_CUR;   
+        r848_write_reg(priv, 0x0C, priv->cfg->R848_Array[4]);
+
+	// Set Filter Comp 
+	priv->cfg->R848_Array[30] = (priv->cfg->R848_Array[30] & 0x9F) | priv->cfg->Sys_Info1.FILT_COMP;  
+        r848_write_reg(priv, 0x26, priv->cfg->R848_Array[30]);
+
+
+   // Set Filter 3dB
+	priv->cfg->R848_Array[30] = (priv->cfg->R848_Array[30] & 0xF7) | priv->cfg->Sys_Info1.FILT_3DB;  
+        r848_write_reg(priv, 0x26, priv->cfg->R848_Array[30]);
+
+	// Set Filter Ext Condition (%)
+    priv->cfg->R848_Array[30] = (priv->cfg->R848_Array[30] & 0xF8) | 0x04 | priv->cfg->Sys_Info1.FILT_EXT_POINT;   //ext both HPF/LPF
+        r848_write_reg(priv, 0x26, priv->cfg->R848_Array[30]);
+
+
+/*
+	// Set Inductor Bias
+	R848_I2C.RegAddr = 0x04;
+	R848_Array[4] = (R848_Array[4] & 0xFE) | Sys_Info1.INDUC_BIAS; 
+	R848_I2C.Data = R848_Array[4];
+	if(I2C_Write(&R848_I2C) != RT_Success)
+		return RT_Fail;
+*/
+	// Set sw cap clk
+	priv->cfg->R848_Array[18] = (priv->cfg->R848_Array[18] & 0xFC) | priv->cfg->Sys_Info1.SWCAP_CLK; 
+        r848_write_reg(priv, 0x1A, priv->cfg->R848_Array[18]);
+
+	// Set NA det power
+	priv->cfg->R848_Array[30] = (priv->cfg->R848_Array[30] & 0x7F) | priv->cfg->Sys_Info1.NA_PWR_DET; 
+        r848_write_reg(priv, 0x26, priv->cfg->R848_Array[30]);
+
+/*
+	// Set AGC clk 
+	R848_I2C.RegAddr = 0x1A;	//  R848:R26[4:2] 
+	R848_Array[18] = (R848_Array[18] & 0xE3) | Sys_Info1.AGC_CLK;  
+	R848_I2C.Data = R848_Array[18];
+	if(I2C_Write(&R848_I2C) != RT_Success)
+		return RT_Fail;
+*/
+
+	//Set GPO High
+	priv->cfg->R848_Array[15] = (priv->cfg->R848_Array[15] & 0xFE) | 0x01;
+        r848_write_reg(priv, 0x17, priv->cfg->R848_Array[15]);
+
+
 	return RT_Success;
 }
 
 
-
-
 uint8_t  R848_Filt_Cal_ADC( struct r848_priv *priv,uint32_t IF_Freq, uint8_t R848_BW, uint8_t FilCal_Gap)
 {
-	  return 1;
+	 uint8_t     u1FilterCodeResult = 0;
+	 uint8_t     u1FilterCode = 0;
+	 uint32_t   u4RingFreq = 72000;
+	 uint8_t     u1FilterCalValue = 0;
+	 uint8_t     u1FilterCalValuePre = 0;
+	 uint8_t     initial_cnt = 0;
+	 uint8_t     i = 0;
+	 uint8_t 	R848_Bandwidth = 0x00;
+	 uint8_t   VGA_Count = 0;
+	 uint8_t   VGA_Read = 0;
+	int rc;
+
+	 R848_Standard_Type	R848_Standard;
+	 R848_Standard=R848_ATSC; //no set R848_DVB_S
+
+	 //Write initial reg before doing calibration 
+        rc = r848_write(priv, 0x08, R848_iniArray_dvbs, sizeof(R848_iniArray_dvbs));
+
+//	 if(R848_Cal_Prepare(priv,R848_LPF_CAL) != RT_Success)      
+	      return RT_Fail;
+
+
+
+	 priv->cfg->R848_Array[31] = (priv->cfg->R848_Array[31] & 0xC3) | 0x2C;  
+	r848_write_reg(priv, 0x27, priv->cfg->R848_Array[31]);
+
+	 priv->cfg->R848_Array[10] = (priv->cfg->R848_Array[10] & 0xEF) | 0x00; 
+        r848_write_reg(priv, 0x12, priv->cfg->R848_Array[10]);
+
+	 priv->cfg->R848_Array[29] = (priv->cfg->R848_Array[29] & 0x7F) | 0x00; 
+        r848_write_reg(priv, 0x25, priv->cfg->R848_Array[29]);
+
+	
+	 priv->cfg->R848_Array[31] = (priv->cfg->R848_Array[31] & 0x3F) | 0x80;  
+        r848_write_reg(priv, 0x27, priv->cfg->R848_Array[31]);
+	
+	 priv->cfg->R848_Array[25] = (priv->cfg->R848_Array[25] & 0x00) | 0x8B;   //out div=8, RF poly=low band, power=min_lp
+        r848_write_reg(priv, 0x21, priv->cfg->R848_Array[25]);
+
+     //Must do before PLL() 
+	 if(R848_MUX(priv,u4RingFreq + IF_Freq, u4RingFreq, R848_STD_SIZE) != RT_Success)     //FilCal MUX (LO_Freq, RF_Freq)
+	     return RT_Fail;
+
+	 //Set PLL
+//	 if(R848_PLL(priv,(u4RingFreq + IF_Freq), R848_STD_SIZE) != RT_Success)   //FilCal PLL
+//	       return RT_Fail;
+
+	 //-----below must set after R848_MUX()-------//
+	 //Set LNA TF for RF=72MHz. no use
+
+        priv->cfg->R848_Array[0] = (priv->cfg->R848_Array[0] & 0x80) | 0x00;  
+        r848_write_reg(priv, 0x08, priv->cfg->R848_Array[0]);
+
+	 //Adc=on set 0;
+     priv->cfg->R848_Array[7] = (priv->cfg->R848_Array[7] & 0x7F);
+        r848_write_reg(priv, 0x0F, priv->cfg->R848_Array[7]);
+
+	//pwd_vga  vga power on set 0;
+     priv->cfg->R848_Array[10] = (priv->cfg->R848_Array[10] & 0x7F);  
+        r848_write_reg(priv, 0x12, priv->cfg->R848_Array[10]);
+
+	 //vga6db normal set 0;
+     priv->cfg->R848_Array[3] = (priv->cfg->R848_Array[3] & 0xF7);
+        r848_write_reg(priv, 0x0B, priv->cfg->R848_Array[3]);
+
+ 	 //Vga Gain = -12dB 
+     priv->cfg->R848_Array[12] = (priv->cfg->R848_Array[12] & 0xF0);
+        r848_write_reg(priv, 0x14, priv->cfg->R848_Array[12]);
+
+	
+	 // vcomp = 0
+	 priv->cfg->R848_Array[30] = (priv->cfg->R848_Array[30] & 0x9F);	
+        r848_write_reg(priv, 0x26, priv->cfg->R848_Array[30]);
+
+	 //Set BW=8M, HPF corner narrowest; 1.7M disable
+	 priv->cfg->R848_Array[11] = (priv->cfg->R848_Array[11] & 0x00);	  
+        r848_write_reg(priv, 0x13, priv->cfg->R848_Array[11]);
+
+	 //------- increase VGA power to let ADC read value significant ---------//
+
+     	priv->cfg->R848_Array[10] = (priv->cfg->R848_Array[10] & 0xF0) | 0;  //filter code=0
+        r848_write_reg(priv, 0x12, priv->cfg->R848_Array[10]);
+
+
+	 for(VGA_Count=0; VGA_Count < 16; VGA_Count ++)
+	 {
+//		R848_I2C.Data    = (priv->cfg->R848_Array[12] & 0xF0) + VGA_Count;  
+        r848_write_reg(priv, 0x14, priv->cfg->R848_Array[12]);
+
+		usleep(10); //
+		
+		if(R848_Muti_Read(priv,&VGA_Read) != RT_Success)
+			return RT_Fail;
+
+		if(VGA_Read > 40)
+			break;
+	 }
+
+	 //------- Try suitable BW --------//
+
+	 if(R848_BW==0x60) //6M
+         initial_cnt = 1;  //try 7M first
+	 else
+		 initial_cnt = 0;  //try 8M first
+
+	 for(i=initial_cnt; i<3; i++)
+	 {
+         if(i==0)
+             R848_Bandwidth = 0x00; //8M
+		 else if(i==1)
+			 R848_Bandwidth = 0x40; //7M
+		 else
+			 R848_Bandwidth = 0x60; //6M
+
+	     priv->cfg->R848_Array[11] = (priv->cfg->R848_Array[11] & 0x00) | R848_Bandwidth;	  
+        r848_write_reg(priv, 0x13, priv->cfg->R848_Array[11]);
+
+		 // read code 0
+		 priv->cfg->R848_Array[10] = (priv->cfg->R848_Array[10] & 0xF0) | 0;  //code 0
+        r848_write_reg(priv, 0x12, priv->cfg->R848_Array[11]);
+
+		 usleep(10); //delay ms
+	     
+		 if(R848_Muti_Read(priv,&u1FilterCalValuePre) != RT_Success)
+			  return RT_Fail;
+
+		 //read code 13
+		 priv->cfg->R848_Array[10] = (priv->cfg->R848_Array[10] & 0xF0) | 13;  //code 13
+	         r848_write_reg(priv, 0x12, priv->cfg->R848_Array[10]);
+
+		 usleep(10); //delay ms
+	     
+		 if(R848_Muti_Read(priv,&u1FilterCalValue) != RT_Success)
+			  return RT_Fail;
+
+		 if(u1FilterCalValuePre > (u1FilterCalValue+8))  //suitable BW found
+			 break;
+	 }
+
+     //-------- Try LPF filter code ---------//
+	 u1FilterCalValuePre = 0;
+	 for(u1FilterCode=0; u1FilterCode<16; u1FilterCode++)
+	 {
+         priv->cfg->R848_Array[10] = (priv->cfg->R848_Array[10] & 0xF0) | u1FilterCode;
+        r848_write_reg(priv, 0x12, priv->cfg->R848_Array[10]);
+
+		 usleep(10); //delay ms
+
+		 if(R848_Muti_Read(priv,&u1FilterCalValue) != RT_Success)
+		      return RT_Fail;
+
+		 if(u1FilterCode==0)
+              u1FilterCalValuePre = u1FilterCalValue;
+
+		 if((u1FilterCalValue+FilCal_Gap) < u1FilterCalValuePre)
+		 {
+			 u1FilterCodeResult = u1FilterCode;
+			  break;
+		 }
+
+	 }
+
+	 if(u1FilterCode==16)
+          u1FilterCodeResult = 15;
+
+	  return u1FilterCodeResult;
 
 }
 
 
-R848_ErrCode R848_DVBS_Setting( struct r848_priv *priv,R848_Set_Info R848_INFO)
+R848_ErrCode R848_DVBS_Setting( struct r848_priv *priv, R848_Info R848_INFO)
 {
 	 uint32_t	LO_KHz;
 	 uint8_t fine_tune,Coarse_tune;
-	// uint8_t test_coar=0x0D;
+	//uint8_t test_coar=0x0D;
 	 uint32_t Coarse;
-	I2C_TYPE  R848_I2C;
 
 //	if(R848_INFO.R848_Standard != R848_pre_standard)
-	{
-		r848_write(priv, 0x08, R848_iniArray_dvbs, sizeof(R848_iniArray_dvbs));
-	}
+//	{
+//		r848_write(priv, 0x08, R848_iniArray_dvbs, sizeof(R848_iniArray_dvbs));
+//	}
     priv->cfg->R848_pre_standard = R848_INFO.R848_Standard;
 
 
@@ -1571,7 +2466,6 @@ R848_ErrCode R848_DVBS_Setting( struct r848_priv *priv,R848_Set_Info R848_INFO)
 	{	
 		priv->cfg->R848_Array[23]=(priv->cfg->R848_Array[23] & 0x00) | 0x83;			//R848:R31[7:0]   1.14/0.64
 	}
-	R848_I2C.Data = priv->cfg->R848_Array[23];
         r848_write_reg(priv, 0x1F, priv->cfg->R848_Array[23]);
 
 
@@ -1598,153 +2492,97 @@ R848_ErrCode R848_DVBS_Setting( struct r848_priv *priv,R848_Set_Info R848_INFO)
         r848_write_reg(priv, 0x2C, priv->cfg->R848_Array[36]);
 
 
-
-
 	//Output Signal Mode    (  O is diff  ; 1 is single  )
-	if(R848_INFO.R848_DVBS_OutputSignal_Mode != SINGLEOUT)
-	{
+	if(R848_INFO.R848_DVBS_OutputSignal_Mode != SINGLEOUT) {
 		priv->cfg->R848_Array[35] &=0x7F;
-	}
-	else
-	{
+	} else{
 		priv->cfg->R848_Array[35] |=0x80;  //R710 R11[4]    R848:R43[7]   43-8=35   43(0x2B) is addr ; [35] is data
 	}
-
         r848_write_reg(priv, 0x2B, priv->cfg->R848_Array[35]);
 
 
 
 	//AGC Type  //R13[4] Negative=0 ; Positive=1;
-	if(R848_INFO.R848_DVBS_AGC_Mode != AGC_POSITIVE)
-	{
+	if(R848_INFO.R848_DVBS_AGC_Mode != AGC_POSITIVE) {
 		priv->cfg->R848_Array[37] &= 0xF7;
-	}
-	else
-	{
+	} else {
 		priv->cfg->R848_Array[37] |= 0x08;  //R710 R13[4]    R848:R45[3]   45-8=37   45(0x2D) is addr ; [37] is data
 	}
         r848_write_reg(priv, 0x2D, priv->cfg->R848_Array[37]);
 
 
 
-	if (R848_INFO.DVBS_BW >67400)
-	{
+	if (R848_INFO.DVBS_BW >67400) {
 		fine_tune=1;
 		Coarse =(( R848_INFO.DVBS_BW -67400) /1600)+31;
 		if((( R848_INFO.DVBS_BW -67400) % 1600) > 0)
 		Coarse+=1;
-	}
-
-	else if((R848_INFO.DVBS_BW >62360)&&(R848_INFO.DVBS_BW<=67400))
-	{
+	} else if((R848_INFO.DVBS_BW >62360)&&(R848_INFO.DVBS_BW<=67400)) {
 		Coarse=31;
 		fine_tune=1;		
-	}
-	else if((R848_INFO.DVBS_BW >38000)&&(R848_INFO.DVBS_BW<=62360))
-	{
+	} else if((R848_INFO.DVBS_BW >38000)&&(R848_INFO.DVBS_BW<=62360)) {
 		fine_tune=1;	
 		Coarse =(( R848_INFO.DVBS_BW -38000) /1740)+16;
 		if((( R848_INFO.DVBS_BW -38000) % 1740) > 0)
-		Coarse+=1;
-				
-	}
-	else if(R848_INFO.DVBS_BW<=5000)
-	{	
+			Coarse+=1;
+	} else if(R848_INFO.DVBS_BW<=5000) {	
 		Coarse=0;
 		fine_tune=0;
-	}
-	else if((R848_INFO.DVBS_BW>5000) && (R848_INFO.DVBS_BW<=8000))
-	{
+	} else if((R848_INFO.DVBS_BW>5000) && (R848_INFO.DVBS_BW<=8000)) {
 		Coarse=0;
 		fine_tune=1;
-	}
-	else if((R848_INFO.DVBS_BW>8000) && (R848_INFO.DVBS_BW<=10000))
-	{
+	} else if((R848_INFO.DVBS_BW>8000) && (R848_INFO.DVBS_BW<=10000)) {
 		Coarse=1;
 		fine_tune=1;
-	}
-	else if((R848_INFO.DVBS_BW>10000) && (R848_INFO.DVBS_BW<=12000))
-	{
+	} else if((R848_INFO.DVBS_BW>10000) && (R848_INFO.DVBS_BW<=12000)) {
 		Coarse=2;
 		fine_tune=1;
-	}
-	else if((R848_INFO.DVBS_BW>12000) && (R848_INFO.DVBS_BW<=14200))
-	{
+	} else if((R848_INFO.DVBS_BW>12000) && (R848_INFO.DVBS_BW<=14200)) {
 		Coarse=3;
 		fine_tune=1;
-	}
-	else if((R848_INFO.DVBS_BW>14200) && (R848_INFO.DVBS_BW<=16000))
-	{
+	} else if((R848_INFO.DVBS_BW>14200) && (R848_INFO.DVBS_BW<=16000)) {
 		Coarse=4;
 		fine_tune=1;
-	}
-	else if((R848_INFO.DVBS_BW>16000) && (R848_INFO.DVBS_BW<=17800))
-	{
+	} else if((R848_INFO.DVBS_BW>16000) && (R848_INFO.DVBS_BW<=17800)) {
 		Coarse=5;
 		fine_tune=0;
-	}
-	else if((R848_INFO.DVBS_BW>17800) && (R848_INFO.DVBS_BW<=18600))
-	{
+	} else if((R848_INFO.DVBS_BW>17800) && (R848_INFO.DVBS_BW<=18600)) {
 		Coarse=5;
 		fine_tune=1;
-	}
-	else if((R848_INFO.DVBS_BW>18600) && (R848_INFO.DVBS_BW<=20200))
-	{
+	} else if((R848_INFO.DVBS_BW>18600) && (R848_INFO.DVBS_BW<=20200)) {
 		Coarse=6;
 		fine_tune=1;
-	}
-	else if((R848_INFO.DVBS_BW>20200) && (R848_INFO.DVBS_BW<=22400))
-	{
+	} else if((R848_INFO.DVBS_BW>20200) && (R848_INFO.DVBS_BW<=22400)) {
 		Coarse=7;
 		fine_tune=1;
-	}
-	else if((R848_INFO.DVBS_BW>22400) && (R848_INFO.DVBS_BW<=24600))
-	{
+	} else if((R848_INFO.DVBS_BW>22400) && (R848_INFO.DVBS_BW<=24600)) {
 		Coarse=9;
 		fine_tune=1;
-	}
-	else if((R848_INFO.DVBS_BW>24600) && (R848_INFO.DVBS_BW<=25400))
-	{
+	} else if((R848_INFO.DVBS_BW>24600) && (R848_INFO.DVBS_BW<=25400)) {
 		Coarse=10;
 		fine_tune=0;
-	}
-	else if((R848_INFO.DVBS_BW>25400) && (R848_INFO.DVBS_BW<=26000))
-	{
+	} else if((R848_INFO.DVBS_BW>25400) && (R848_INFO.DVBS_BW<=26000)) {
 		Coarse=10;
 		fine_tune=1;
-	}
-	else if((R848_INFO.DVBS_BW>26000) && (R848_INFO.DVBS_BW<=27200))
-	{
+	} else if((R848_INFO.DVBS_BW>26000) && (R848_INFO.DVBS_BW<=27200)) {
 		Coarse=11;
 		fine_tune=0;
-	}
-	else if((R848_INFO.DVBS_BW>27200) && (R848_INFO.DVBS_BW<=27800))
-	{
+	} else if((R848_INFO.DVBS_BW>27200) && (R848_INFO.DVBS_BW<=27800)) {
 		Coarse=11;
 		fine_tune=1;
-	}
-	else if((R848_INFO.DVBS_BW>27800) && (R848_INFO.DVBS_BW<=30200))
-	{
+	} else if((R848_INFO.DVBS_BW>27800) && (R848_INFO.DVBS_BW<=30200)) {
 		Coarse=12;
 		fine_tune=1;
-	}
-	else if((R848_INFO.DVBS_BW>30200) && (R848_INFO.DVBS_BW<=32600))
-	{
+	} else if((R848_INFO.DVBS_BW>30200) && (R848_INFO.DVBS_BW<=32600)) {
 		Coarse=13;
 		fine_tune=1;
-	}
-	else if((R848_INFO.DVBS_BW>32600) && (R848_INFO.DVBS_BW<=33800))
-	{
+	} else if((R848_INFO.DVBS_BW>32600) && (R848_INFO.DVBS_BW<=33800)) {
 		Coarse=14;
 		fine_tune=1;
-	}
-	else if((R848_INFO.DVBS_BW>33800) && (R848_INFO.DVBS_BW<=36800))
-	{
+	} else if((R848_INFO.DVBS_BW>33800) && (R848_INFO.DVBS_BW<=36800)) {
 		Coarse=15;
 		fine_tune=1;
-	}
-	else if((R848_INFO.DVBS_BW>36800) && (R848_INFO.DVBS_BW<=38000))
-	{
+	} else if((R848_INFO.DVBS_BW>36800) && (R848_INFO.DVBS_BW<=38000)) {
 		Coarse=16;
 		fine_tune=1;
 	}
@@ -1760,9 +2598,7 @@ R848_ErrCode R848_DVBS_Setting( struct r848_priv *priv,R848_Set_Info R848_INFO)
 	priv->cfg->R848_Array[15] = (priv->cfg->R848_Array[15] & 0xFE);
         r848_write_reg(priv, 0x17, priv->cfg->R848_Array[15]);
 
-
 	return RT_Success;
-
 }
 
 

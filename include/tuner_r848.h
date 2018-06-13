@@ -102,18 +102,50 @@ enum r848_xtal_cap_value {
 	//XTAL_HIGH_CAP_0P
 };
 
-typedef struct _R848_I2C_LEN_TYPE
+//----------------------------------------------------------//
+//                   R848 Public Parameter                     //
+//----------------------------------------------------------//
+typedef enum _R848_ErrCode
 {
-	uint8_t RegAddr;
-	uint8_t Data[50];
-	uint8_t Len;
-}I2C_LEN_TYPE;
+        RT_Success = 0,
+        RT_Fail    = 1
+}R848_ErrCode;
 
-typedef struct _R848_I2C_TYPE
+
+
+typedef enum _R848_GPO_Type
 {
-	uint8_t RegAddr;
-	uint8_t Data;
-}I2C_TYPE;
+        HI_SIG = 0,
+        LO_SIG = 1
+}R848_GPO_Type;
+
+typedef enum _R848_RF_Gain_TYPE
+{
+        RF_AUTO = 0,
+        RF_MANUAL
+}R848_RF_Gain_TYPE;
+
+typedef enum _R848_DVBS_OutputSignal_Type
+{
+        DIFFERENTIALOUT = 0,
+        SINGLEOUT     = 1
+}R848_DVBS_OutputSignal_Type;
+
+typedef enum _R848_DVBS_AGC_Type
+{
+        AGC_NEGATIVE = 0,
+        AGC_POSITIVE = 1
+}R848_DVBS_AGC_Type;
+
+
+typedef struct _R848_RF_Gain_Info
+{
+        uint16_t   RF_gain_comb;
+        uint8_t   RF_gain1;
+        uint8_t   RF_gain2;
+        uint8_t   RF_gain3;
+}R848_RF_Gain_Info;
+
 
 typedef struct _R848_Sys_Info_Type
 {
@@ -158,12 +190,20 @@ struct r848_config {
 	R848_Sys_Info_Type Sys_Info1;
   /* DVBT */
 
-
-
 };
+
+typedef struct R848_Info {
+        uint32_t                       RF_KHz;
+        uint32_t                        DVBS_BW;
+        R848_Standard_Type           R848_Standard;
+        R848_DVBS_OutputSignal_Type  R848_DVBS_OutputSignal_Mode;
+        R848_DVBS_AGC_Type           R848_DVBS_AGC_Mode;
+}R848_Info;
+
 
 struct r848_priv {
 	struct r848_config		*cfg;
+	struct R848_Info		*info;
 
 	uint8_t				regs[R848_NUM_REGS];
 	uint8_t				buf[R848_NUM_REGS + 1];
@@ -213,28 +253,11 @@ struct r848_freq_range {
 };
 
 
-typedef struct _R848_Set_Info
-{
-	uint32_t                       RF_KHz;
-	uint32_t						 DVBS_BW;
-	uint8_t           R848_Standard;
-	int  R848_DVBS_OutputSignal_Mode;
-	int           R848_DVBS_AGC_Mode; 
-} R848_Set_Info;
-
 struct filter_cal {
 	uint8_t flag;
 	uint8_t bw;
 	uint8_t code;
 };
-
-typedef struct _R848_SectType
-{
-	uint8_t   Phase_Y;
-	uint8_t   Gain_X;
-	uint8_t   Iqcap;
-	uint8_t   Value;
-}R848_SectType;
 
 /*
 typedef struct _R848_Sys_Info_Type
@@ -304,11 +327,15 @@ typedef struct _R848_Cal_Info_Type
 	uint8_t		TF_CAL;
 }R848_Cal_Info_Type;
 
-typedef struct _R848_TF_Result
+
+typedef struct _R848_SectType
 {
-	uint8_t   TF_Set;
-	uint8_t   TF_Value;
-}R848_TF_Result;
+	uint8_t   Phase_Y;
+	uint8_t   Gain_X;
+	uint8_t   Iqcap;
+	uint8_t   Value;
+}R848_SectType;
+
 
 typedef enum _R848_TF_Band_Type
 {
@@ -339,7 +366,6 @@ typedef enum _R848_UL_TF_Type
 }R848_UL_TF_Type;
 
 
-
 typedef enum _R848_Cal_Type
 {
 	R848_IMR_CAL = 0,
@@ -360,7 +386,6 @@ typedef enum _R848_BW_Type
 	BW_200K
 }R848_BW_Type;
 
-
 enum R848_XTAL_PWR_VALUE {
 	XTAL_SMALL_LOWEST = 0,
 	XTAL_SMALL_LOW,
@@ -378,66 +403,22 @@ typedef enum _R848_Xtal_Div_TYPE
 }R848_Xtal_Div_TYPE;
 
 
-//----------------------------------------------------------//
-//                   R848 Public Parameter                     //
-//----------------------------------------------------------//
-typedef enum _R848_ErrCode
-{
-	RT_Success = 0,
-	RT_Fail    = 1
-}R848_ErrCode;
-
-
-
-typedef enum _R848_GPO_Type
-{
-	HI_SIG = 0,
-	LO_SIG = 1
-}R848_GPO_Type;
-
-typedef enum _R848_RF_Gain_TYPE
-{
-	RF_AUTO = 0,
-	RF_MANUAL
-}R848_RF_Gain_TYPE;
-
-typedef enum _R848_DVBS_OutputSignal_Type
-{
-	DIFFERENTIALOUT = 0,
-	SINGLEOUT     = 1
-}R848_DVBS_OutputSignal_Type;
-
-typedef enum _R848_DVBS_AGC_Type
-{
-	AGC_NEGATIVE = 0,
-	AGC_POSITIVE = 1
-}R848_DVBS_AGC_Type;
-
-
-
-
-
-typedef struct _R848_RF_Gain_Info
-{
-	uint16_t   RF_gain_comb;
-	uint8_t   RF_gain1;
-	uint8_t   RF_gain2;
-	uint8_t   RF_gain3;
-}R848_RF_Gain_Info;
-
-
-
 int r848_standby(struct r848_priv *priv);
 int r848_init(struct r848_priv *priv);
 int r848_set_freq(struct r848_priv *priv, uint32_t freq);
-int r848_set_gain(struct r848_priv *priv, int set_manual_gain, int gain);
+int r848_set_gain(struct r848_priv *priv, int gain);
+int r848_set_gain_mode(struct r848_priv *priv, int set_manual_gain, int gain);
 int r848_set_bandwidth(struct r848_priv *priv, int bandwidth,  uint32_t rate);
 
 int r848_print_registers(struct r848_priv *priv);
+int r848_get_lock_status(struct r848_priv *priv, uint8_t *lock);
 int r848_tf_check(struct r848_priv *priv);
 int r848_cal_prepare(struct r848_priv *priv, uint8_t u1CalFlag);
 int r848_imr(struct r848_priv *priv, uint8_t IMR_MEM, uint8_t IM_Flag);
 R848_ErrCode R848_MUX( struct r848_priv *priv,uint32_t LO_KHz, uint32_t RF_KHz, R848_Standard_Type R848_Standard);
-R848_ErrCode R848_DVBS_Setting( struct r848_priv *priv,R848_Set_Info R848_INFO);
+R848_ErrCode R848_DVBS_Setting( struct r848_priv *priv, R848_Info R848_INFO);
+int R848_Muti_Read( struct r848_priv *priv, uint8_t* IMR_Result_Data);
+R848_ErrCode R848_IMR( struct r848_priv *priv,uint8_t IMR_MEM, int IM_Flag);
+uint8_t  R848_Filt_Cal_ADC( struct r848_priv *priv,uint32_t IF_Freq, uint8_t R848_BW, uint8_t FilCal_Gap);
 
 #endif
